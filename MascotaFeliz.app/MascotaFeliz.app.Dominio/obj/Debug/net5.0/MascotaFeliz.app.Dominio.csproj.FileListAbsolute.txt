@@ -1,0 +1,12 @@
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\bin\Debug\net5.0\MascotaFeliz.app.Dominio.deps.json
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\bin\Debug\net5.0\MascotaFeliz.app.Dominio.dll
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\bin\Debug\net5.0\ref\MascotaFeliz.app.Dominio.dll
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\bin\Debug\net5.0\MascotaFeliz.app.Dominio.pdb
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.csproj.AssemblyReference.cache
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.AssemblyInfoInputs.cache
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.AssemblyInfo.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.csproj.CoreCompileInputs.cache
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.dll
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\ref\MascotaFeliz.app.Dominio.dll
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Dominio\obj\Debug\net5.0\MascotaFeliz.app.Dominio.pdb

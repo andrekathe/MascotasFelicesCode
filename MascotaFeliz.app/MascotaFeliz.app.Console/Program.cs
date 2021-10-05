@@ -11,7 +11,7 @@ namespace MascotaFeliz.app.Console
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
-            AddPersona();
+          //  AddPersona();
         }
 
         private static void AddPersona(){

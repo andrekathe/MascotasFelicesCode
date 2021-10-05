@@ -19,7 +19,7 @@ namespace MascotaFeliz.app.Persistencia.AppData{
             //cadena de conexión
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MascotaFeliz");
+                optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=MascotaFeliz;Trusted_Connection=True;");
             }
         }
         public EfAppContext(){}

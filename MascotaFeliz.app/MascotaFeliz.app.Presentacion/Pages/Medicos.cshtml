@@ -1,0 +1,14 @@
+﻿@page
+@model MascotaFeliz.app.Presentacion.Pages.MedicosModel
+@{
+}
+<h1>Listado de Medicos</h1>
+<table class="table">
+    @foreach (var medico in Model.Medicos)
+    {
+        <tr>
+            <td>@medico.Nombre</td>
+            <td>@medico.Apellido</td>
+        </tr>
+    }
+</table>

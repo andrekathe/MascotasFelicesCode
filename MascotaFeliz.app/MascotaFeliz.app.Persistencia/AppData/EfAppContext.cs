@@ -22,6 +22,7 @@ namespace MascotaFeliz.app.Persistencia.AppData{
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-3JED4U8\\SQLEXPRESS;Initial Catalog=MascotaFeliz;integrated security = true");
             }
         }
+
         public EfAppContext(){}
     }
 }

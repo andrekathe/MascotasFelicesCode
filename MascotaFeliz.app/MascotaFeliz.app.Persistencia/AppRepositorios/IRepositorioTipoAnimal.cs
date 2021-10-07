@@ -8,7 +8,7 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
         IEnumerable<TipoAnimal> GetAllTiposAnimales();
         TipoAnimal AddTipoAnimal (TipoAnimal tipoAnimal);
         TipoAnimal UpdateTipoAnimal (TipoAnimal tipoAnimal);
-        void DeleteTipoAnimal (int nombreTipoAnimal);
-        TipoAnimal GetTipoAnimal (int nombreTipoAnimal);
+        void DeleteTipoAnimal (int idTipoAnimal);
+        TipoAnimal GetTipoAnimal (int idTipoAnimal);
     }
 }

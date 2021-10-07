@@ -6,7 +6,7 @@ namespace MascotaFeliz.app.Dominio.Entidades
 {
     public class CentroVeterinario
     {
-        [Key]
+        [Key]  
         public int Nit { get; set; }                
         public string Nombre { get; set; }    
         public string Direccion { get; set; }
@@ -15,6 +15,15 @@ namespace MascotaFeliz.app.Dominio.Entidades
         {
            
         }
+
+        public CentroVeterinario(int nit, string nombre, string direccion) 
+        {
+            this.Nit = nit;
+            this.Nombre = nombre;
+            this.Direccion = direccion;
+               
+        }
+        
     }    
 
 }

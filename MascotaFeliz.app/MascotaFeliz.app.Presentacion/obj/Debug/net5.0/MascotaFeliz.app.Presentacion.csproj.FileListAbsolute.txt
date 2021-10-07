@@ -71,3 +71,6 @@ D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFel
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\bin\Debug\net5.0\MascotaFeliz.app.Dominio.pdb
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\bin\Debug\net5.0\MascotaFeliz.app.Persistencia.pdb
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Medicos.cshtml.g.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Mascotas.cshtml.g.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\CentroVeterinario.cshtml.g.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Propietario.cshtml.g.cs

@@ -12,7 +12,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
     public class MedicosModel : PageModel
     {
         private readonly IRepositorioMedico repositorioMedico;
-        public IEnumerable<Medico> Medicos {get;set;}
+        public IEnumerable<Medico> listadoMedicos = new List<Medico> ();
 
         public MedicosModel(IRepositorioMedico repositorioMedico)
         {
@@ -21,7 +21,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
 
         public void OnGet()
         {
-            Medicos = repositorioMedico.GetAllMedicos();
+            listadoMedicos = repositorioMedico.GetAllMedicos();
         }
     }
 }

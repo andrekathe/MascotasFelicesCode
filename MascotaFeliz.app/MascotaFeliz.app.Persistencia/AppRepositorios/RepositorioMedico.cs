@@ -7,38 +7,50 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 {
     public class RepositorioMedico : IRepositorioMedico
     {
-        private readonly EfAppContext _appContext;
-        public RepositorioMedico(EfAppContext appContext){
-            _appContext=appContext;
-        }
+
         IEnumerable<Medico> IRepositorioMedico.GetAllMedicos(){
-            return _appContext.Medicos;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var listadoMedicos = (from p in Contexto.Medicos select p).ToList();
+                return listadoMedicos;
+            }
         }
+
         Medico IRepositorioMedico.AddMedico (Medico medico){
-            var medicoAdicionado=_appContext.Medicos.Add(medico);
-            _appContext.SaveChanges();
-            return medicoAdicionado.Entity;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var medicoAdicionado=Contexto.Medicos.Add(medico);
+                Contexto.SaveChanges();
+                return medicoAdicionado.Entity;
+            }
         }
+
         Medico IRepositorioMedico.UpdateMedico (Medico medico){
-            var medicoEncontrado = _appContext.Medicos.FirstOrDefault(m=> m.Id==medico.Id);
-            if(medicoEncontrado!= null){
-                medicoEncontrado.TarjetaProfesional = medico.TarjetaProfesional;
-                medicoEncontrado.Especializacion = medico.Especializacion;
-                medicoEncontrado.IdCentroVeterinario = medico.IdCentroVeterinario;
-                
-                _appContext.SaveChanges();
-            }                      
-            return medicoEncontrado;      
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var medicoEncontrado = Contexto.Medicos.FirstOrDefault(m=> m.Id==medico.Id);
+                if(medicoEncontrado!= null){
+                    medicoEncontrado.TarjetaProfesional = medico.TarjetaProfesional;
+                    medicoEncontrado.Especializacion = medico.Especializacion;
+                    medicoEncontrado.IdCentroVeterinario = medico.IdCentroVeterinario;
+                    
+                    Contexto.SaveChanges();
+                }                      
+                return medicoEncontrado;  
+            }    
         }
-        void IRepositorioMedico.DeleteMedico (int tarjetaProfesional){
-            var medicoEncontrado = _appContext.Medicos.FirstOrDefault(m=> m.TarjetaProfesional==tarjetaProfesional);
-            if(medicoEncontrado== null)
-                return;
-            _appContext.Medicos.Remove(medicoEncontrado);
-            _appContext.SaveChanges();
+
+        void IRepositorioMedico.DeleteMedico (int idMedico){
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var medicoEncontrado = Contexto.Medicos.FirstOrDefault(m=> m.Id==idMedico);
+                if(medicoEncontrado== null)
+                    return;
+                Contexto.Medicos.Remove(medicoEncontrado);
+                Contexto.SaveChanges();
+            }
         }
-        Medico IRepositorioMedico.GetMedico (int tarjetaProfesional){
-            return _appContext.Medicos.FirstOrDefault(m=> m.TarjetaProfesional==tarjetaProfesional);
+
+        Medico IRepositorioMedico.GetMedico (int idMedico){
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                return Contexto.Medicos.FirstOrDefault(m=> m.Id==idMedico);
+            }
         }
     }
 }

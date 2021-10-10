@@ -7,40 +7,45 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body style="background-image: url(https://lh3.googleusercontent.com/proxy/K_J2kpAE53eEl7OookJpaNTUkUEnXA-Jj9ybtRveGJXaUaojAHPVj1arQDBLFIsZiomkUiirrmCWpxHJ7mlh8RZY83_uVQw); background-size:cover;">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
+                <img src="~/img/logo-app.jpg" width="40px" height="40px">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Mascota Feliz App</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1">                    
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Inicio</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/CentroVeterinario">Empresas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Propietarios">Registro</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Propietarios">Propietarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Visitas</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Medicos">Medicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Mascotas">Mascotas</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container" >
+        <main role="main" class="pb-3">            
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - MascotaFeliz.app.Presentacion - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <img src="~/img/logo-MAANFE.png" width="100px" height="40px">
+            &copy; 2021 - MAANFE Solutions - <a asp-area="" asp-page="/Privacy">Privacidad</a>
         </div>
     </footer>
 

@@ -2,14 +2,79 @@
 @model MascotaFeliz.app.Presentacion.Pages.MascotasModel
 @{
 }
-<h1>Listado de Mascotas</h1>
-<table class="table">
-    @foreach (var mascota in Model.Mascotas)
-    {
-        <tr>
-            <td>@mascota.Nombre</td>
-            <td>@mascota.Raza</td>
-            <td>@mascota.TipoAnimal</td>
-        </tr>
+
+<div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
+    <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+        <h1>Registro de Mascotas</h1>
+        </hr>
+        <form method="POST">
+            <div class="form-group">
+                <label>Nombre: </label>
+                <input id="nit" type="text" placeholder="Digite Nombre" class="form-control" style="width:60%;">
+            </div>
+            <div class="form-group">
+                <label>Raza: </label>
+                <input id="nombre" type="text" placeholder="Digite Raza" class="form-control" style="width:60%;">
+            </div>
+            <div class="form-group">
+                <label>TipoAnimal: </label>
+                <input id="direccion" type="text" placeholder="Digite TipoAnimal" class="form-control" style="width:60%;">
+            </div>
+            <br>
+            <div>
+                <button id="btnRegistrar" type="submit" class="btn btn-dark" style="display: block;">Registrar Empresa</button>             
+                <button id="btnActualizar" type="submit" class="btn btn-dark" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark" onclick="LimpiarDatos();">Cancelar</button> 
+            </div>
+            
+            
+        </form>
+    </div>
+
+    <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+        <h1>Listado de Mascotas</h1>
+        <table class="table">
+            <tr style="background-color: rgb(153,102,153);">
+                <td>Nommbre</td>
+                <td>Raza</td>
+                <td>TipoAnimal</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @foreach (var mascota in Model.listaMascotas)
+            {
+                <tr>
+                    <td>@mascota.Nombre</td>
+                    <td>@mascota.Raza</td>
+                    <td>@mascota.TipoAnimal</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    function MensajeActualizar(){
+        confirm("¿Esta seguro que desea actualizar el Centro Veterinario?");
     }
-</table>
+
+    function MensajeEliminar(){
+        confirm("¿Esta seguro que desea eliminar el Centro Veterinario?");
+    }
+
+    function LimpiarDatos(){
+        $("#nit").val('');
+        $("#nombre").val('');
+        $("#direccion").val('');
+        $("btnRegistrar").css('display','block');
+        $("btnActualizar").css('display','none');
+    }
+
+    function CargarDatos(Nit, Nombre, Direccion){
+        $("#nit").val(Nit);
+        $("#nombre").val(Nombre);
+        $("#direccion").val(Direccion);
+        $("btnRegistrar").css('display','none');
+        $("btnActualizar").css('display','block');
+    }
+</script>

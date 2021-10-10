@@ -7,39 +7,51 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 {
     public class RepositorioPersona : IRepositorioPersona
     {
-        private readonly EfAppContext _appContext;
-        public RepositorioPersona(EfAppContext appContext){
-            _appContext=appContext;
-        }
+        
         IEnumerable<Persona> IRepositorioPersona.GetAllPersonas(){
-            return _appContext.Personas;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var listadoPersonas = (from p in Contexto.Personas select p).ToList();
+                return listadoPersonas;
+            }
         }
+
         Persona IRepositorioPersona.AddPersona (Persona persona){
-            var personaAdicionada=_appContext.Personas.Add(persona);
-            _appContext.SaveChanges();
-            return personaAdicionada.Entity;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var personaAdicionada=Contexto.Personas.Add(persona);
+                Contexto.SaveChanges();
+                return personaAdicionada.Entity;
+            }
         }
+
         Persona IRepositorioPersona.UpdatePersona (Persona persona){
-            var personaEncontrada = _appContext.Personas.FirstOrDefault(p=> p.Id==persona.Id);
-            if(personaEncontrada!= null){
-                personaEncontrada.Nombre = persona.Nombre;
-                personaEncontrada.Apellido = persona.Apellido;
-                personaEncontrada.Documento = persona.Documento;
-                personaEncontrada.Telefono = persona.Telefono;
-                
-                _appContext.SaveChanges();
-            }                      
-            return personaEncontrada;      
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var personaEncontrada = Contexto.Personas.FirstOrDefault(p=> p.Id==persona.Id);
+                if(personaEncontrada!= null){
+                    personaEncontrada.Nombre = persona.Nombre;
+                    personaEncontrada.Apellido = persona.Apellido;
+                    personaEncontrada.Documento = persona.Documento;
+                    personaEncontrada.Telefono = persona.Telefono;
+                    
+                    Contexto.SaveChanges();
+                }                      
+                return personaEncontrada;   
+            }   
         }
+
         void IRepositorioPersona.DeletePersona (int idPersona){
-            var personaEncontrada = _appContext.Personas.FirstOrDefault(p=> p.Id==idPersona);
-            if(personaEncontrada== null)
-                return;
-            _appContext.Personas.Remove(personaEncontrada);
-            _appContext.SaveChanges();
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var personaEncontrada = Contexto.Personas.FirstOrDefault(p=> p.Id==idPersona);
+                if(personaEncontrada== null)
+                    return;
+                Contexto.Personas.Remove(personaEncontrada);
+                Contexto.SaveChanges();
+            }
         }
+
         Persona IRepositorioPersona.GetPersona (int idPersona){
-            return _appContext.Personas.FirstOrDefault(p=> p.Id==idPersona);
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                return Contexto.Personas.FirstOrDefault(p=> p.Id==idPersona);
+            }
         }
     }
 }

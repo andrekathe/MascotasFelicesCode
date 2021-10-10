@@ -2,18 +2,85 @@
 @model MascotaFeliz.app.Presentacion.Pages.PropietariosModel
 @{
 }
-<h1>Listado de Propietarios</h1>
 
+<div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
+    <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+        <h1>Registro de Propietarios</h1>
+        </hr>
+        <form method="POST">
+            <div class="form-group">
+                <label>Nombre: </label>
+                <input id="nit" type="text" placeholder="Digite Nombre" class="form-control" style="width:60%;">
+            </div>
+            <div class="form-group">
+                <label>Apellido: </label>
+                <input id="nombre" type="text" placeholder="Digite Apellido" class="form-control" style="width:60%;">
+            </div>
+            <div class="form-group">
+                <label>Telefono: </label>
+                <input id="nombre" type="text" placeholder="Digite Telefono" class="form-control" style="width:60%;">
+            </div>
+            <div class="form-group">
+                <label>Dirección: </label>
+                <input id="direccion" type="text" placeholder="Digite Dirección" class="form-control" style="width:60%;">
+            </div>
+            <br>
+            <div>
+                <button id="btnRegistrar" type="submit" class="btn btn-dark" style="display: block;">Registrar Empresa</button>             
+                <button id="btnActualizar" type="submit" class="btn btn-dark" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark" onclick="LimpiarDatos();">Cancelar</button> 
+            </div>
+            
+            
+        </form>
+    </div>
 
+    <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+        <h1>Listado de Propietarios</h1>
+        <table class="table">
+            <tr style="background-color: rgb(153,102,153);">
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Telefono</td>
+                <td>Direccion</td>
+                <td></td>
+                <td></td>
+            </tr>
+            @foreach (var propietario in Model.listadoPropietarios)
+            {
+                <tr>
+                    <td>@propietario.Nombre</td>
+                    <td>@propietario.Apellido</td>
+                    <td>@propietario.Telefono</td>
+                    <td>@propietario.Direccion</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
 
-<table class="table">
-    @foreach (var propietario in Model.Propietarios)
-    {
-        <tr>
-            <td>@propietario.Nombre</td>
-            <td>@propietario.Apellido</td>
-            <td>@propietario.Telefono</td>
-            <td>@propietario.Direccion</td>
-        </tr>
+<script>
+    function MensajeActualizar(){
+        confirm("¿Esta seguro que desea actualizar el Centro Veterinario?");
     }
-</table>
+
+    function MensajeEliminar(){
+        confirm("¿Esta seguro que desea eliminar el Centro Veterinario?");
+    }
+
+    function LimpiarDatos(){
+        $("#nit").val('');
+        $("#nombre").val('');
+        $("#direccion").val('');
+        $("btnRegistrar").css('display','block');
+        $("btnActualizar").css('display','none');
+    }
+
+    function CargarDatos(Nit, Nombre, Direccion){
+        $("#nit").val(Nit);
+        $("#nombre").val(Nombre);
+        $("#direccion").val(Direccion);
+        $("btnRegistrar").css('display','none');
+        $("btnActualizar").css('display','block');
+    }
+</script>

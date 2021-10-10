@@ -7,42 +7,48 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 {
     public class RepositorioTipoAnimal : IRepositorioTipoAnimal
     {
-        private readonly EfAppContext _appContext;
-
-        public RepositorioTipoAnimal(EfAppContext appContext){
-            _appContext=appContext;
-        }
 
         IEnumerable<TipoAnimal> IRepositorioTipoAnimal.GetAllTiposAnimales(){
-            return _appContext.TiposAnimales;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var listadoTiposAnimales = (from p in Contexto.TiposAnimales select p).ToList();
+                return listadoTiposAnimales;
+            }
         }
 
         TipoAnimal IRepositorioTipoAnimal.AddTipoAnimal (TipoAnimal tipoAnimal){
-            var tipoAnimalAdicionado=_appContext.TiposAnimales.Add(tipoAnimal);
-            _appContext.SaveChanges();
-            return tipoAnimalAdicionado.Entity;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var tipoAnimalAdicionado=Contexto.TiposAnimales.Add(tipoAnimal);
+                Contexto.SaveChanges();
+                return tipoAnimalAdicionado.Entity;
+            }
         }
 
         TipoAnimal IRepositorioTipoAnimal.UpdateTipoAnimal (TipoAnimal tipoAnimal){
-            var tipoAnimalEncontrado = _appContext.TiposAnimales.FirstOrDefault(t=> t.Nombre==tipoAnimal.Nombre);
-            if(tipoAnimalEncontrado!= null){
-                tipoAnimalEncontrado.Nombre = tipoAnimal.Nombre;
-                
-                _appContext.SaveChanges();
-            }                      
-            return tipoAnimalEncontrado;      
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var tipoAnimalEncontrado = Contexto.TiposAnimales.FirstOrDefault(t=> t.Nombre==tipoAnimal.Nombre);
+                if(tipoAnimalEncontrado!= null){
+                    tipoAnimalEncontrado.Nombre = tipoAnimal.Nombre;
+                    
+                    Contexto.SaveChanges();
+                }                      
+                return tipoAnimalEncontrado;      
+            }
         }
 
         void IRepositorioTipoAnimal.DeleteTipoAnimal (int idTipoAnimal){
-            var tipoAnimalEncontrado = _appContext.TiposAnimales.FirstOrDefault(t=> t.Id==idTipoAnimal);
-            if(tipoAnimalEncontrado== null)
-                return;
-            _appContext.TiposAnimales.Remove(tipoAnimalEncontrado);
-            _appContext.SaveChanges();
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var tipoAnimalEncontrado = Contexto.TiposAnimales.FirstOrDefault(t=> t.Id==idTipoAnimal);
+                if(tipoAnimalEncontrado== null)
+                    return;
+                Contexto.TiposAnimales.Remove(tipoAnimalEncontrado);
+                Contexto.SaveChanges();
+            }
         }
 
         TipoAnimal IRepositorioTipoAnimal.GetTipoAnimal (int idTipoAnimal){
-            return _appContext.TiposAnimales.FirstOrDefault(t=> t.Id==idTipoAnimal);
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                return Contexto.TiposAnimales.FirstOrDefault(t=> t.Id==idTipoAnimal);
+            }
         }
     }
 }

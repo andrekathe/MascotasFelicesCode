@@ -13,8 +13,8 @@ namespace MascotaFeliz.app.Presentacion.Pages
     {
         
         private readonly IRepositorioPropietario repositorioPropietario;
-        [BindProperty]
-        public IEnumerable<Propietario> Propietarios {get;set;}
+        //[BindProperty] esto lo hicieron en los videos de moodle
+        public IEnumerable<Propietario> listadoPropietarios = new List<Propietario>();
 
         public PropietariosModel(IRepositorioPropietario repositorioPropietario)
         {
@@ -23,7 +23,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
 
         public void OnGet()
         {
-            Propietarios = repositorioPropietario.GetAllPropietarios();
+            listadoPropietarios = repositorioPropietario.GetAllPropietarios();
         }    
 /*
         public void OnPost()

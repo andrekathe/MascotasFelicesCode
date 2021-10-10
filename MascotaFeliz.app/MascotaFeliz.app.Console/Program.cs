@@ -9,12 +9,12 @@ namespace MascotaFeliz.app.Console
     {
         //private static IRepositorioMedico _repoMedico= new RepositorioMedico(new EfAppContext());
         private static IRepositorioTipoAnimal _repoTipoAnimal= new RepositorioTipoAnimal(new EfAppContext());
-        //private static IRepositorioCentroVeterinario _repoCentroVeterinario= new RepositorioCentroVeterinario(new EfAppContext());
+        private static IRepositorioCentroVeterinario _repoCentroVeterinario= new RepositorioCentroVeterinario();
 
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
-            AddDatos();
+            AddDatosEmpresa();
             //DeleteDato();
             GetTodo();
             //GetMedico(1);
@@ -38,19 +38,17 @@ namespace MascotaFeliz.app.Console
         }
 
         private static void AddDatos(){
-            var tipoAnimal = new TipoAnimal("Ave");  
-            _repoTipoAnimal.AddTipoAnimal(tipoAnimal);
-/*
-            var centroVeterinario = new CentroVeterinario(999, "mi mascota","Calle unica");
-            _repoCentroVeterinario.AddCentroVeterinario(centroVeterinario);
-
-            /*var medico=new Medico("Andrea", "Munoz", "3128902012", 1234, tipoAnimal,999);
-            _repoMedico.AddMedico(medico);
+            var tipoAnimal1 = new TipoAnimal("Perro");  
+            var tipoAnimal2 = new TipoAnimal("Gato"); 
+            var tipoAnimal3 = new TipoAnimal("Ave"); 
+            _repoTipoAnimal.AddTipoAnimal(tipoAnimal1);
+            _repoTipoAnimal.AddTipoAnimal(tipoAnimal2);
+            _repoTipoAnimal.AddTipoAnimal(tipoAnimal3);
         }
 
-        private static void GetMedico(int idMedico){
-            var medico= _repoMedico.GetMedico(idMedico);
-            System.Console.WriteLine(medico.Nombre+" "+medico.Apellido);*/
+        private static void AddDatosEmpresa(){
+            var empresa = new CentroVeterinario(999,"MyPet","Calle unica"); 
+            _repoCentroVeterinario.AddCentroVeterinario(empresa);
         }
     }
 }

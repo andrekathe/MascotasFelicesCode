@@ -25,13 +25,11 @@ namespace MascotaFeliz.app.Presentacion
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            //services.AddSingleton<IRepositorioCentroVeterinario, RepositorioCentroVeterinario>();
-            //services.AddSingleton<IRepositorioMascota, RepositorioMascota>();
-            //services.AddSingleton<IRepositorioMedico, RepositorioMedico>();
-            //services.AddSingleton<IRepositorioPersona, RepositorioPersona>();
-            //services.AddSingleton<IRepositorioPropietario, RepositorioPropietario>();
-            //services.AddSingleton<IRepositorioRegistroVisita, RepositorioRegistroVisita>();
-            //services.AddSingleton<IRepositorioTipoAnimal, RepositorioTipoAnimal>();
+            services.AddSingleton<IRepositorioCentroVeterinario, RepositorioCentroVeterinario>();
+            services.AddSingleton<IRepositorioMascota, RepositorioMascota>();
+            services.AddSingleton<IRepositorioMedico, RepositorioMedico>();            
+            services.AddSingleton<IRepositorioPropietario, RepositorioPropietario>();
+            //services.AddSingleton<IRepositorioRegistroVisita, RepositorioRegistroVisita>();           
             //services.AddSingleton<IRepositorioVisitaProgramada, RepositorioVisitaProgramada>();
         }
 

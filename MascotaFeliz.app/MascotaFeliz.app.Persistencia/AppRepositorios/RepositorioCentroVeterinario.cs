@@ -7,12 +7,12 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 {
     public class RepositorioCentroVeterinario : IRepositorioCentroVeterinario
     {           
-        
+
         IEnumerable<CentroVeterinario> IRepositorioCentroVeterinario.GetAllCentrosVeterinarios(){
             //Conexión con Linq
             using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
                 //Consulta Linq
-                var listadoCentrosVeterinarios = (from p in Contexto.CentrosVeterinarios select p).ToList();
+                var listadoCentrosVeterinarios = (from c in Contexto.CentrosVeterinarios select c).ToList();
                 return listadoCentrosVeterinarios;
             }
             
@@ -28,7 +28,7 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 
         CentroVeterinario IRepositorioCentroVeterinario.UpdateCentroVeterinario (CentroVeterinario centroVeterinario){
             using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
-                var centroVeterinarioEncontrado = Contexto.CentrosVeterinarios.FirstOrDefault(p=> p.Id==centroVeterinario.Id);
+                var centroVeterinarioEncontrado = Contexto.CentrosVeterinarios.FirstOrDefault(c=> c.Id==centroVeterinario.Id);
                 if(centroVeterinarioEncontrado!= null){
                     centroVeterinarioEncontrado.Nit = centroVeterinario.Nit;
                     centroVeterinarioEncontrado.Nombre = centroVeterinario.Nombre;
@@ -42,7 +42,7 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 
         void IRepositorioCentroVeterinario.DeleteCentroVeterinario (int idCentroVeterinario){
             using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
-                var centroVeterinarioEncontrado = Contexto.CentrosVeterinarios.FirstOrDefault(p=> p.Id==idCentroVeterinario);
+                var centroVeterinarioEncontrado = Contexto.CentrosVeterinarios.FirstOrDefault(c=> c.Id==idCentroVeterinario);
                 if(centroVeterinarioEncontrado== null)
                     return;
                 Contexto.CentrosVeterinarios.Remove(centroVeterinarioEncontrado);
@@ -51,8 +51,9 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
         }
 
         CentroVeterinario IRepositorioCentroVeterinario.GetCentroVeterinario (int idCentroVeterinario){
-            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
-                return Contexto.CentrosVeterinarios.FirstOrDefault(p=> p.Id==idCentroVeterinario);
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){   
+                //Sintaxis entityFramework            
+                return Contexto.CentrosVeterinarios.FirstOrDefault(c=> c.Id==idCentroVeterinario);
             }
         }
     }

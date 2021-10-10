@@ -12,16 +12,17 @@ namespace MascotaFeliz.app.Presentacion.Pages
     public class MascotasModel : PageModel
     {
         private readonly IRepositorioMascota repositorioMascota;
-        public IEnumerable<Mascota> Mascotas {get;set;}
+        public IEnumerable<Mascota> listaMascotas = new List<Mascota>();
 
         public MascotasModel(IRepositorioMascota repositorioMascota)
         {
             this.repositorioMascota=repositorioMascota;
         }
 
+        //Inicializador de la página
         public void OnGet()
         {
-            Mascotas = repositorioMascota.GetAllMascotas();
+            listaMascotas = repositorioMascota.GetAllMascotas();
         }
     }
 }

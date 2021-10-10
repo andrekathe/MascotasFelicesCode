@@ -7,36 +7,48 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
 {
     public class RepositorioPropietario : IRepositorioPropietario
     {
-        private readonly EfAppContext _appContext;
-        public RepositorioPropietario(EfAppContext appContext){
-            _appContext=appContext;
-        }
+        
         IEnumerable<Propietario> IRepositorioPropietario.GetAllPropietarios(){
-            return _appContext.Propietarios;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var listadoPropietarios = (from p in Contexto.Propietarios select p).ToList();
+                return listadoPropietarios;
+            }
         }
+
         Propietario IRepositorioPropietario.AddPropietario (Propietario propietario){
-            var propietarioAdicionada=_appContext.Propietarios.Add(propietario);
-            _appContext.SaveChanges();
-            return propietarioAdicionada.Entity;
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var propietarioAdicionada=Contexto.Propietarios.Add(propietario);
+                Contexto.SaveChanges();
+                return propietarioAdicionada.Entity;
+            }
         }
+
         Propietario IRepositorioPropietario.UpdatePropietario (Propietario propietario){
-            var propietarioEncontrado = _appContext.Propietarios.FirstOrDefault(p=> p.Id==propietario.Id);
-            if(propietarioEncontrado!= null){
-                propietarioEncontrado.Direccion = propietario.Direccion;                
-                
-                _appContext.SaveChanges();
-            }                      
-            return propietarioEncontrado;      
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var propietarioEncontrado = Contexto.Propietarios.FirstOrDefault(p=> p.Id==propietario.Id);
+                if(propietarioEncontrado!= null){
+                    propietarioEncontrado.Direccion = propietario.Direccion;                
+                    
+                    Contexto.SaveChanges();
+                }                      
+                return propietarioEncontrado;      
+            }
         }
+
         void IRepositorioPropietario.DeletePropietario (int idPropietario){
-            var propietarioEncontrado = _appContext.Propietarios.FirstOrDefault(p=> p.Id==idPropietario);
-            if(propietarioEncontrado== null)
-                return;
-            _appContext.Propietarios.Remove(propietarioEncontrado);
-            _appContext.SaveChanges();
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                var propietarioEncontrado = Contexto.Propietarios.FirstOrDefault(p=> p.Id==idPropietario);
+                if(propietarioEncontrado== null)
+                    return;
+                Contexto.Propietarios.Remove(propietarioEncontrado);
+                Contexto.SaveChanges();
+            }
         }
+
         Propietario IRepositorioPropietario.GetPropietario (int idPropietario){
-            return _appContext.Propietarios.FirstOrDefault(p=> p.Id==idPropietario);
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                return Contexto.Propietarios.FirstOrDefault(p=> p.Id==idPropietario);
+            }
         }
     }
 }

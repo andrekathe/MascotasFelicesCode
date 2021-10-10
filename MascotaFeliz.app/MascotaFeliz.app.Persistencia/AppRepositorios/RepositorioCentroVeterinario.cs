@@ -6,21 +6,29 @@ using MascotaFeliz.app.Persistencia.AppData;
 namespace MascotaFeliz.app.Persistencia.AppRepositorios
 {
     public class RepositorioCentroVeterinario : IRepositorioCentroVeterinario
-    {
-        private readonly EfAppContext _appContext;
+    {   
         public RepositorioCentroVeterinario(EfAppContext appContext){
             _appContext=appContext;
         }
+
         IEnumerable<CentroVeterinario> IRepositorioCentroVeterinario.GetAllCentrosVeterinarios(){
-            return _appContext.CentrosVeterinarios;
+            //Conexión con Linq
+            using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
+                //Consulta Linq
+                var listadoCentrosVeterinarios = (from p in Contexto.CentroVeterinario select p).ToList();
+                return listadoCentrosVeterinarios;
+            }
+            
         }
+
         CentroVeterinario IRepositorioCentroVeterinario.AddCentroVeterinario (CentroVeterinario centroVeterinario){
             var centroVeterinarioAdicionado=_appContext.CentrosVeterinarios.Add(centroVeterinario);
             _appContext.SaveChanges();
             return centroVeterinarioAdicionado.Entity;
         }
+
         CentroVeterinario IRepositorioCentroVeterinario.UpdateCentroVeterinario (CentroVeterinario centroVeterinario){
-            var centroVeterinarioEncontrado = _appContext.CentrosVeterinarios.FirstOrDefault(p=> p.Nit==centroVeterinario.Nit);
+            var centroVeterinarioEncontrado = _appContext.CentrosVeterinarios.FirstOrDefault(p=> p.Id==centroVeterinario.Id);
             if(centroVeterinarioEncontrado!= null){
                 centroVeterinarioEncontrado.Nit = centroVeterinario.Nit;
                 centroVeterinarioEncontrado.Nombre = centroVeterinario.Nombre;
@@ -30,13 +38,15 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
             }                      
             return centroVeterinarioEncontrado;      
         }
-        void IRepositorioCentroVeterinario.DeleteCentroVeterinario (int nitCentroVeterinario){
-            var centroVeterinarioEncontrado = _appContext.CentrosVeterinarios.FirstOrDefault(c=> c.Nit==nitCentroVeterinario);
+
+        void IRepositorioCentroVeterinario.DeleteCentroVeterinario (int idCentroVeterinario){
+            var centroVeterinarioEncontrado = _appContext.CentrosVeterinarios.FirstOrDefault(c=> c.Id==idCentroVeterinario);
             if(centroVeterinarioEncontrado== null)
                 return;
             _appContext.CentrosVeterinarios.Remove(centroVeterinarioEncontrado);
             _appContext.SaveChanges();
         }
+
         CentroVeterinario IRepositorioCentroVeterinario.GetCentroVeterinario (int nitCentroVeterinario){
             return _appContext.CentrosVeterinarios.FirstOrDefault(c=> c.Nit==nitCentroVeterinario);
         }

@@ -24,6 +24,7 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
             if(personaEncontrada!= null){
                 personaEncontrada.Nombre = persona.Nombre;
                 personaEncontrada.Apellido = persona.Apellido;
+                personaEncontrada.Documento = persona.Documento;
                 personaEncontrada.Telefono = persona.Telefono;
                 
                 _appContext.SaveChanges();

@@ -24,7 +24,7 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
             if(medicoEncontrado!= null){
                 medicoEncontrado.TarjetaProfesional = medico.TarjetaProfesional;
                 medicoEncontrado.Especializacion = medico.Especializacion;
-                medicoEncontrado.NitCentroVeterinario = medico.NitCentroVeterinario;
+                medicoEncontrado.IdCentroVeterinario = medico.IdCentroVeterinario;
                 
                 _appContext.SaveChanges();
             }                      

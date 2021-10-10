@@ -9,13 +9,14 @@ using MascotaFeliz.app.Persistencia.AppRepositorios;
 
 namespace MascotaFeliz.app.Presentacion.Pages
 {
-    public class PropietarioModel : PageModel
+    public class PropietariosModel : PageModel
     {
         
         private readonly IRepositorioPropietario repositorioPropietario;
+        [BindProperty]
         public IEnumerable<Propietario> Propietarios {get;set;}
 
-        public PropietarioModel(IRepositorioPropietario repositorioPropietario)
+        public PropietariosModel(IRepositorioPropietario repositorioPropietario)
         {
             this.repositorioPropietario=repositorioPropietario;
         }
@@ -24,5 +25,10 @@ namespace MascotaFeliz.app.Presentacion.Pages
         {
             Propietarios = repositorioPropietario.GetAllPropietarios();
         }    
-    }
+/*
+        public void OnPost()
+        {
+            Propietarios=repositorioPropietario.UpdatePropietario(Propietario);
+        }   
+  */  }
 }

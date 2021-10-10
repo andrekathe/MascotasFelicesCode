@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XZH0v33drQFjd0NBrQoVtSyfXjc3tplr/Alkt283n1kTbV6v/GQfTetyKzNYLZjg7sUQsRqYaghB2UgBZvMbfg==",
+  "dgSpecHash": "GT50Rt8U+JYMhmv1gMz+d+Jbj5A/SeDOVLSBMRfWzzeBebrbogYd4okUwJyyWQGFg9VW3Q+u5wpkcBqIZDhR1Q==",
   "success": true,
   "projectFilePath": "D:\\misionTIC2022\\Desarrollo de software\\MascotaFeliz\\MascotaFeliz.app\\MascotaFeliz.app.Dominio\\MascotaFeliz.app.Dominio.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Hp\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

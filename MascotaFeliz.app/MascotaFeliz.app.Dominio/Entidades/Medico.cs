@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MascotaFeliz.app.Dominio.Entidades
-{
-    [Table("Medico")]
+{    
     public class Medico:Persona
     {                
         [Required]

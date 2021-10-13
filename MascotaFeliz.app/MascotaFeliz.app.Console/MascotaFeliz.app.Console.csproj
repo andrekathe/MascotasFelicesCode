@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MascotaFeliz.app.Dominio\MascotaFeliz.app.Dominio.csproj" />
     <ProjectReference Include="..\MascotaFeliz.app.Persistencia\MascotaFeliz.app.Persistencia.csproj" />
+    <ProjectReference Include="..\MascotaFeliz.app.Presentacion\MascotaFeliz.app.Presentacion.csproj" />
   </ItemGroup>
 
   <ItemGroup>

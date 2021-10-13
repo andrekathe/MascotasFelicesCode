@@ -8,7 +8,7 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
         IEnumerable<CentroVeterinario> GetAllCentrosVeterinarios();
         CentroVeterinario AddCentroVeterinario (CentroVeterinario centroVeterinario);
         CentroVeterinario UpdateCentroVeterinario (CentroVeterinario centroVeterinario);
-        void DeleteCentroVeterinario (int nitCentroVeterinario);
-        CentroVeterinario GetCentroVeterinario (int nitCentroVeterinario);
+        void DeleteCentroVeterinario (int idCentroVeterinario);
+        CentroVeterinario GetCentroVeterinario (int idCentroVeterinario);
     }
 }

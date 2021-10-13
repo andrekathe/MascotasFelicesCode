@@ -3,35 +3,47 @@
 @{
 }
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
+    
+    
+    <form method="POST">
     <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Registro de Empresas</h1>
-        </hr>
-        <form method="POST">
+        <h1>Nuevo Registro</h1>
+        </hr>        
+            <!-- campo oculto con el id de la entidad que se va a actualizar -->
+            <input id="id" type="hidden" asp-for="empresa.Id" class="form-control"/>
+
             <div class="form-group">
-                <label>Nit: </label>
-                <input id="nit" type="text" placeholder="Digite Nit" class="form-control" style="width:60%;">
+                <label asp-for="empresa.Nit">Nit: </label>
+                <input id="nit" asp-for="empresa.Nit" type="text" placeholder="Digite Nit" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Nombre del Centro Veterinario: </label>
-                <input id="nombre" type="text" placeholder="Digite Nombre" class="form-control" style="width:60%;">
+                <label asp-for="empresa.Nombre">Nombre del Centro Veterinario: </label>
+                <input id="nombre" asp-for="empresa.Nombre" type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Dirección: </label>
-                <input id="direccion" type="text" placeholder="Digite Dirección" class="form-control" style="width:60%;">
+                <label asp-for="empresa.Direccion">Dirección: </label>
+                <input id="direccion" asp-for="empresa.Direccion" type="text" placeholder="Digite Dirección" class="form-control" style="width:90%;">
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark" style="display: block;">Registrar Empresa</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark" style="display: none;">Guardar Cambios</button> 
-                <button id="btnCancelar" type="submit" class="btn btn-dark" onclick="LimpiarDatos();">Cancelar</button> 
+                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Empresa</button>             
+                <button id="btnActualizar" type="submit" asp-page-handler="update" class="btn btn-dark btn-sm" onclick="MensajeActualizar();" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
             </div>
             
             
-        </form>
+        
     </div>
 
     <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
         <h1>Listado de Centros Veterinarios</h1>
+ <!--       <form>
+            <div class="form-group">
+                <label>Filtro: </label>
+                <input id="filtro" type="text" placeholder="Digite nombre" style="width:60%;">
+                <button id="btnBuscar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Buscar</button> 
+            </div>
+        </form> -->       
         <table class="table">
             <tr style="background-color: rgb(153,102,153);">
                 <td>Nit</td>
@@ -46,12 +58,13 @@
                     <td>@centroVeterinario.Nit</td>
                     <td>@centroVeterinario.Nombre</td>
                     <td>@centroVeterinario.Direccion</td>
-                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@centroVeterinario.Nit','@centroVeterinario.Nombre','@centroVeterinario.Direccion');"></div></td>
-                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>
+                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@centroVeterinario.Id','@centroVeterinario.Nit','@centroVeterinario.Nombre','@centroVeterinario.Direccion');"></div></td>
+                    <td><div><button id="btnEliminar" asp-route-id="@centroVeterinario.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
                 </tr>
             }
         </table>
     </div>
+    </form>
 </div>
 
 <script>
@@ -64,18 +77,20 @@
     }
 
     function LimpiarDatos(){
+        $("#id").val('');
         $("#nit").val('');
         $("#nombre").val('');
         $("#direccion").val('');
-        $("btnRegistrar").css('display','block');
-        $("btnActualizar").css('display','none');
+        $("#btnRegistrar").css('display','block');
+        $("#btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nit, Nombre, Direccion){
+    function CargarDatos(Id, Nit, Nombre, Direccion){
+        $("#id").val(Id);
         $("#nit").val(Nit);
         $("#nombre").val(Nombre);
         $("#direccion").val(Direccion);
-        $("btnRegistrar").css('display','none');
-        $("btnActualizar").css('display','block');
+        $("#btnRegistrar").css('display','none');
+        $("#btnActualizar").css('display','block');
     }
 </script>

@@ -5,30 +5,34 @@
 
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
     <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Registro de Propietarios</h1>
+        <h1>Nuevo Registro</h1>
         </hr>
         <form method="POST">
             <div class="form-group">
                 <label>Nombre: </label>
-                <input id="nit" type="text" placeholder="Digite Nombre" class="form-control" style="width:60%;">
+                <input id="nombre" asp-for="propietario.Nombre"  type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
                 <label>Apellido: </label>
-                <input id="nombre" type="text" placeholder="Digite Apellido" class="form-control" style="width:60%;">
+                <input id="apellido" asp-for="propietario.Apellido"  type="text" placeholder="Digite Apellido" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Documento de identidad: </label>
+                <input id="documento" asp-for="propietario.Documento"  type="text" placeholder="Digite Documento" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
                 <label>Telefono: </label>
-                <input id="nombre" type="text" placeholder="Digite Telefono" class="form-control" style="width:60%;">
-            </div>
+                <input id="telefono" asp-for="propietario.Telefono"  type="text" placeholder="Digite Telefono" class="form-control" style="width:90%;">
+            </div>            
             <div class="form-group">
                 <label>Dirección: </label>
-                <input id="direccion" type="text" placeholder="Digite Dirección" class="form-control" style="width:60%;">
+                <input id="direccion" asp-for="propietario.Direccion"  type="text" placeholder="Digite Dirección" class="form-control" style="width:90%;">
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark" style="display: block;">Registrar Empresa</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark" style="display: none;">Guardar Cambios</button> 
-                <button id="btnCancelar" type="submit" class="btn btn-dark" onclick="LimpiarDatos();">Cancelar</button> 
+                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Propietario</button>             
+                <button id="btnActualizar" type="submit" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
             </div>
             
             
@@ -41,6 +45,7 @@
             <tr style="background-color: rgb(153,102,153);">
                 <td>Nombre</td>
                 <td>Apellido</td>
+                <td>Documento</td>
                 <td>Telefono</td>
                 <td>Direccion</td>
                 <td></td>
@@ -51,8 +56,11 @@
                 <tr>
                     <td>@propietario.Nombre</td>
                     <td>@propietario.Apellido</td>
+                    <td>@propietario.Documento</td>
                     <td>@propietario.Telefono</td>
                     <td>@propietario.Direccion</td>
+                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@propietario.Nombre','@propietario.Apellido','@propietario.Documento','@propietario.Telefono','@propietario.Direccion');"></div></td>
+                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>
                 </tr>
             }
         </table>
@@ -61,24 +69,28 @@
 
 <script>
     function MensajeActualizar(){
-        confirm("¿Esta seguro que desea actualizar el Centro Veterinario?");
+        confirm("¿Esta seguro que desea actualizar el Propietario?");
     }
 
     function MensajeEliminar(){
-        confirm("¿Esta seguro que desea eliminar el Centro Veterinario?");
+        confirm("¿Esta seguro que desea eliminar el Propietario?");
     }
 
     function LimpiarDatos(){
-        $("#nit").val('');
         $("#nombre").val('');
+        $("#apellido").val('');
+        $("#documento").val('');
+        $("#telefono").val('');
         $("#direccion").val('');
         $("btnRegistrar").css('display','block');
         $("btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nit, Nombre, Direccion){
-        $("#nit").val(Nit);
+    function CargarDatos(Nombre, Apellido, Documento, Telefono, Direccion){        
         $("#nombre").val(Nombre);
+        $("#apellido").val(Apellido);
+        $("#documento").val(Documento);
+        $("#telefono").val(Telefono);
         $("#direccion").val(Direccion);
         $("btnRegistrar").css('display','none');
         $("btnActualizar").css('display','block');

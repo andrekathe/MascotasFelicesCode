@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MascotaFeliz.app.Dominio.Entidades
 {
-    [Table("Propietario")]
+    
     public class Propietario:Persona
     {
         [Column("Direccion")]                

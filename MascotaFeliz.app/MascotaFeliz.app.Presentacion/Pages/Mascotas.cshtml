@@ -5,26 +5,50 @@
 
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
     <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Registro de Mascotas</h1>
+        <h1>Nuevo Registro</h1>
         </hr>
         <form method="POST">
             <div class="form-group">
                 <label>Nombre: </label>
-                <input id="nit" type="text" placeholder="Digite Nombre" class="form-control" style="width:60%;">
+                <input id="nombre" asp-for="mascota.Nombre" type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Color de ojos: </label>
+                <input id="colorOjos" asp-for="mascota.ColorOjos" type="text" placeholder="Digite Color Ojos" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Color de piel: </label>
+                <input id="colorPiel" asp-for="mascota.ColorPiel" type="text" placeholder="Digite Color Piel" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Estatura: </label>
+                <input id="estatura" asp-for="mascota.Estatura" type="text" placeholder="Digite Estatura" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Peso: </label>
+                <input id="peso" asp-for="mascota.Peso" type="text" placeholder="Digite Peso" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
                 <label>Raza: </label>
-                <input id="nombre" type="text" placeholder="Digite Raza" class="form-control" style="width:60%;">
+                <input id="raza" asp-for="mascota.Raza" type="text" placeholder="Digite Raza" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>TipoAnimal: </label>
-                <input id="direccion" type="text" placeholder="Digite TipoAnimal" class="form-control" style="width:60%;">
+                <label>Sexo: </label>
+                <input id="sexo" asp-for="mascota.Sexo" type="text" placeholder="Digite Sexo" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Propietario: </label>
+                <input id="propietario" asp-for="mascota.IdPropietario" type="text" placeholder="Digite Propietario" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Tipo de animal: </label>
+                <input id="tipoAnimal" asp-for="mascota.TipoAnimal" type="text" placeholder="Digite Tipo Animal" class="form-control" style="width:90%;">
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark" style="display: block;">Registrar Empresa</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark" style="display: none;">Guardar Cambios</button> 
-                <button id="btnCancelar" type="submit" class="btn btn-dark" onclick="LimpiarDatos();">Cancelar</button> 
+                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Mascota</button>             
+                <button id="btnActualizar" type="submit" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
             </div>
             
             
@@ -36,8 +60,14 @@
         <table class="table">
             <tr style="background-color: rgb(153,102,153);">
                 <td>Nommbre</td>
+                <td>Color de ojos</td>
+                <td>Color de piel</td>
+                <td>Estatura</td>
+                <td>Peso</td>
                 <td>Raza</td>
-                <td>TipoAnimal</td>
+                <td>Sexo</td>
+                <td>Propietario</td>
+                <td>Tipo de animal</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -45,8 +75,16 @@
             {
                 <tr>
                     <td>@mascota.Nombre</td>
+                    <td>@mascota.ColorOjos</td>
+                    <td>@mascota.ColorPiel</td>
+                    <td>@mascota.Estatura</td>
+                    <td>@mascota.Peso</td>
                     <td>@mascota.Raza</td>
+                    <td>@mascota.Sexo</td>
+                    <td>@mascota.IdPropietario</td>
                     <td>@mascota.TipoAnimal</td>
+                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@mascota.Nombre','@mascota.ColorOjos','@mascota.ColorPiel','@mascota.Estatura','@mascota.Peso','@mascota.Raza','@mascota.Sexo','@mascota.IdPropietario','@mascota.TipoAnimal');"></div></td>
+                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>                               
                 </tr>
             }
         </table>
@@ -55,25 +93,37 @@
 
 <script>
     function MensajeActualizar(){
-        confirm("¿Esta seguro que desea actualizar el Centro Veterinario?");
+        confirm("¿Esta seguro que desea actualizar la mascota?");
     }
 
     function MensajeEliminar(){
-        confirm("¿Esta seguro que desea eliminar el Centro Veterinario?");
+        confirm("¿Esta seguro que desea eliminar la mascota?");
     }
 
     function LimpiarDatos(){
-        $("#nit").val('');
         $("#nombre").val('');
-        $("#direccion").val('');
+        $("#colorOjos").val('');
+        $("#colorPiel").val('');
+        $("#estatura").val('');
+        $("#peso").val('');
+        $("#raza").val('');
+        $("#sexo").val('');
+        $("#propietario").val('');
+        $("#tipoAnimal").val('');
         $("btnRegistrar").css('display','block');
         $("btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nit, Nombre, Direccion){
-        $("#nit").val(Nit);
+    function CargarDatos(Nombre, ColorOjos, ColorPiel, Estatura, Peso, Raza, Sexo, IdPropietario, TipoAnimal){
         $("#nombre").val(Nombre);
-        $("#direccion").val(Direccion);
+        $("#colorOjos").val(ColorOjos);
+        $("#colorPiel").val(ColorPiel);
+        $("#estatura").val(Estatura);
+        $("#peso").val(Peso);
+        $("#raza").val(Raza);
+        $("#sexo").val(Sexo);
+        $("#propietario").val(IdPropietario);
+        $("#tipoAnimal").val(TipoAnimal);
         $("btnRegistrar").css('display','none');
         $("btnActualizar").css('display','block');
     }

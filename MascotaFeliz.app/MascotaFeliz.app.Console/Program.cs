@@ -7,8 +7,8 @@ namespace MascotaFeliz.app.Console
 {
     class Program
     {
-        //private static IRepositorioMedico _repoMedico= new RepositorioMedico(new EfAppContext());
-        private static IRepositorioTipoAnimal _repoTipoAnimal= new RepositorioTipoAnimal(new EfAppContext());
+        //private static IRepositorioMedico _repoMedico= new RepositorioMedico();
+        private static IRepositorioTipoAnimal _repoTipoAnimal= new RepositorioTipoAnimal();
         private static IRepositorioCentroVeterinario _repoCentroVeterinario= new RepositorioCentroVeterinario();
 
         static void Main(string[] args)

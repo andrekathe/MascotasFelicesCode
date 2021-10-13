@@ -13,8 +13,7 @@ namespace MascotaFeliz.app.Dominio.Entidades
         public int Id { get; set; }
         
         [Column("Nit")]
-        [Required]
-        [StringLength(10)]  
+        [Required]        
         public int Nit { get; set; } 
 
         [Required]

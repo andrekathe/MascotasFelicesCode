@@ -14,6 +14,9 @@ namespace MascotaFeliz.app.Presentacion.Pages
         private readonly IRepositorioMedico repositorioMedico;
         public IEnumerable<Medico> listadoMedicos = new List<Medico> ();
 
+        [BindProperty]
+        public Medico medico {get; set;}
+
         public MedicosModel(IRepositorioMedico repositorioMedico)
         {
             this.repositorioMedico=repositorioMedico;
@@ -22,6 +25,18 @@ namespace MascotaFeliz.app.Presentacion.Pages
         public void OnGet()
         {
             listadoMedicos = repositorioMedico.GetAllMedicos();
+        }
+
+        public IActionResult OnPost()
+        {
+            Medico medicoPost = new Medico();      
+            medicoPost = repositorioMedico.AddMedico(medico);                           
+                
+            if(medicoPost != null)
+                return RedirectToPage("./Medico");
+            else
+                return RedirectToPage("./Error1");
+            
         }
     }
 }

@@ -12,9 +12,11 @@ namespace MascotaFeliz.app.Presentacion.Pages
     public class PropietariosModel : PageModel
     {
         
-        private readonly IRepositorioPropietario repositorioPropietario;
-        //[BindProperty] esto lo hicieron en los videos de moodle
+        private readonly IRepositorioPropietario repositorioPropietario;        
         public IEnumerable<Propietario> listadoPropietarios = new List<Propietario>();
+
+        [BindProperty]
+        public Propietario propietario {get; set;}
 
         public PropietariosModel(IRepositorioPropietario repositorioPropietario)
         {
@@ -24,7 +26,19 @@ namespace MascotaFeliz.app.Presentacion.Pages
         public void OnGet()
         {
             listadoPropietarios = repositorioPropietario.GetAllPropietarios();
-        }    
+        }   
+
+        public IActionResult OnPost()
+        {
+            Propietario propietarioPost = new Propietario();      
+            propietarioPost = repositorioPropietario.AddPropietario(propietario);                           
+                
+            if(propietarioPost != null)
+                return RedirectToPage("./Propietarios");
+            else
+                return RedirectToPage("./Error1");
+            
+        } 
 /*
         public void OnPost()
         {

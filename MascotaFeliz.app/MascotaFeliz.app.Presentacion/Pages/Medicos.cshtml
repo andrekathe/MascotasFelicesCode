@@ -5,26 +5,42 @@
 
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
     <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Registro de Medicos</h1>
+        <h1>Nuevo Registro</h1>
         </hr>
         <form method="POST">
             <div class="form-group">
                 <label>Nombre: </label>
-                <input id="nit" type="text" placeholder="Digite Nombre" class="form-control" style="width:60%;">
+                <input id="nombre" asp-for="medico.Nombre" type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
                 <label>Apellido: </label>
-                <input id="nombre" type="text" placeholder="Digite Apellido" class="form-control" style="width:60%;">
+                <input id="apellido" asp-for="medico.Apellido" type="text" placeholder="Digite Apellido" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
+                <label>Documento de identidad: </label>
+                <input id="documento" asp-for="medico.Documento" type="text" placeholder="Digite Documento" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Telefono: </label>
+                <input id="telefono" asp-for="medico.Telefono" type="text" placeholder="Digite Telefono" class="form-control" style="width:90%;">
+            </div>    
+            <div class="form-group">
                 <label>Tarjeta Profesional: </label>
-                <input id="direccion" type="text" placeholder="Digite Tarjeta Profesional" class="form-control" style="width:60%;">
+                <input id="tarjetaProfesional" asp-for="medico.TarjetaProfesional" type="text" placeholder="Digite Tarjeta Profesional" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label>Especialización: </label>
+                <<input id="especializacion" asp-for="medico.Especializacion" type="text" placeholder="Digite Especializacion" class="form-control" style="width:90%;">>
+            </div>
+            <div class="form-group">
+                <label>Centro Veterinario donde labora: </label>
+                <input id="idCentroVeterinario" asp-for="medico.IdCentroVeterinario" type="text" placeholder="Digite Centro Veterinario" class="form-control" style="width:90%;">
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark" style="display: block;">Registrar Empresa</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark" style="display: none;">Guardar Cambios</button> 
-                <button id="btnCancelar" type="submit" class="btn btn-dark" onclick="LimpiarDatos();">Cancelar</button> 
+                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Medico</button>             
+                <button id="btnActualizar" type="submit" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
             </div>
             
             
@@ -37,7 +53,11 @@
             <tr style="background-color: rgb(153,102,153);">                
                 <td>Nombre</td>
                 <td>Apellido</td>
+                <td>Documento</td>
+                <td>Telefono</td>
                 <td>Tarjeta Profesional</td>
+                <td>Especialización</td>
+                <td>Centro Veterinario</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -46,7 +66,13 @@
                 <tr>
                     <td>@medico.Nombre</td>
                     <td>@medico.Apellido</td>
+                    <td>@medico.Documento</td>
+                    <td>@medico.Telefono</td>
                     <td>@medico.TarjetaProfesional</td>
+                    <td>@medico.Especializacion</td>
+                    <td>@medico.IdCentroVeterinario</td>
+                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@medico.Nombre','@medico.Apellido','@medico.Documento','@medico.Telefono','@medico.TarjetaProfesional','@medico.Especializacion','@medico.IdCentroVeterinario');"></div></td>
+                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>                
                 </tr>
             }
         </table>
@@ -55,25 +81,33 @@
 
 <script>
     function MensajeActualizar(){
-        confirm("¿Esta seguro que desea actualizar el Centro Veterinario?");
+        confirm("¿Esta seguro que desea actualizar el Medico?");
     }
 
     function MensajeEliminar(){
-        confirm("¿Esta seguro que desea eliminar el Centro Veterinario?");
+        confirm("¿Esta seguro que desea eliminar el Medico?");
     }
 
     function LimpiarDatos(){
-        $("#nit").val('');
         $("#nombre").val('');
-        $("#direccion").val('');
+        $("#apellido").val('');
+        $("#documento").val('');
+        $("#telefono").val('');
+        $("#tarjetaProfesional").val('');
+        $("#especializacion").val('');
+        $("#idCentroVeterinario").val('');
         $("btnRegistrar").css('display','block');
         $("btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nit, Nombre, Direccion){
-        $("#nit").val(Nit);
+    function CargarDatos(Nombre, Apellido, Documento, Telefono, TarjetaProfesional, Especializacion, IdCentroVeterinario){
         $("#nombre").val(Nombre);
-        $("#direccion").val(Direccion);
+        $("#apellido").val(Apellido);
+        $("#documento").val(Documento);
+        $("#telefono").val(Telefono);
+        $("#tarjetaProfesional").val(TarjetaProfesional);
+        $("#especializacion").val(Especializacion);
+        $("#idCentroVeterinario").val(IdCentroVeterinario);
         $("btnRegistrar").css('display','none');
         $("btnActualizar").css('display','block');
     }

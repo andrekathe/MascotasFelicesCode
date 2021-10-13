@@ -1535,6 +1535,23 @@
         "runtime": {
           "bin/placeholder/MascotaFeliz.app.Persistencia.dll": {}
         }
+      },
+      "MascotaFeliz.app.Presentacion/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "MascotaFeliz.app.Dominio": "1.0.0",
+          "MascotaFeliz.app.Persistencia": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MascotaFeliz.app.Presentacion.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MascotaFeliz.app.Presentacion.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -5789,12 +5806,18 @@
       "type": "project",
       "path": "../MascotaFeliz.app.Persistencia/MascotaFeliz.app.Persistencia.csproj",
       "msbuildProject": "../MascotaFeliz.app.Persistencia/MascotaFeliz.app.Persistencia.csproj"
+    },
+    "MascotaFeliz.app.Presentacion/1.0.0": {
+      "type": "project",
+      "path": "../MascotaFeliz.app.Presentacion/MascotaFeliz.app.Presentacion.csproj",
+      "msbuildProject": "../MascotaFeliz.app.Presentacion/MascotaFeliz.app.Presentacion.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "MascotaFeliz.app.Dominio >= 1.0.0",
       "MascotaFeliz.app.Persistencia >= 1.0.0",
+      "MascotaFeliz.app.Presentacion >= 1.0.0",
       "Microsoft.entityframeworkcore >= 5.0.10",
       "Microsoft.entityframeworkcore.Design >= 5.0.0"
     ]
@@ -5829,6 +5852,9 @@
             },
             "D:\\misionTIC2022\\Desarrollo de software\\MascotaFeliz\\MascotaFeliz.app\\MascotaFeliz.app.Persistencia\\MascotaFeliz.app.Persistencia.csproj": {
               "projectPath": "D:\\misionTIC2022\\Desarrollo de software\\MascotaFeliz\\MascotaFeliz.app\\MascotaFeliz.app.Persistencia\\MascotaFeliz.app.Persistencia.csproj"
+            },
+            "D:\\misionTIC2022\\Desarrollo de software\\MascotaFeliz\\MascotaFeliz.app\\MascotaFeliz.app.Presentacion\\MascotaFeliz.app.Presentacion.csproj": {
+              "projectPath": "D:\\misionTIC2022\\Desarrollo de software\\MascotaFeliz\\MascotaFeliz.app\\MascotaFeliz.app.Presentacion\\MascotaFeliz.app.Presentacion.csproj"
             }
           }
         }

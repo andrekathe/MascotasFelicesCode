@@ -25,7 +25,6 @@ D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFel
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\MascotaFeliz.app.Presentacion.RazorCoreGenerate.cache
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
-D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Privacy.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Shared\_Layout.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
@@ -74,3 +73,4 @@ D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFel
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Mascotas.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\CentroVeterinario.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Propietarios.cshtml.g.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Error1.cshtml.g.cs

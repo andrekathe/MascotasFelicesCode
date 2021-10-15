@@ -1,70 +1,72 @@
 ﻿@page
 @model MascotaFeliz.app.Presentacion.Pages.PropietariosModel
 @{
+    ViewData["Title"] = "Propietarios";
 }
 
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
-    <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Nuevo Registro</h1>
-        </hr>
-        <form method="POST">
+    <form method="POST">
+        <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+            <h1>Nuevo Registro</h1>
+            </hr>
+            <!-- campo oculto con el id de la entidad que se va a actualizar -->
+            <input id="id" type="hidden" asp-for="propietario.Id" class="form-control"/>
+        
             <div class="form-group">
-                <label>Nombre: </label>
+                <label asp-for="propietario.Nombre">Nombre: </label>
                 <input id="nombre" asp-for="propietario.Nombre"  type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Apellido: </label>
+                <label asp-for="propietario.Apellido">Apellido: </label>
                 <input id="apellido" asp-for="propietario.Apellido"  type="text" placeholder="Digite Apellido" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Documento de identidad: </label>
+                <label asp-for="propietario.Documento">Documento de identidad: </label>
                 <input id="documento" asp-for="propietario.Documento"  type="text" placeholder="Digite Documento" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Telefono: </label>
+                <label asp-for="propietario.Telefono">Telefono: </label>
                 <input id="telefono" asp-for="propietario.Telefono"  type="text" placeholder="Digite Telefono" class="form-control" style="width:90%;">
             </div>            
             <div class="form-group">
-                <label>Dirección: </label>
+                <label asp-for="propietario.Direccion">Dirección: </label>
                 <input id="direccion" asp-for="propietario.Direccion"  type="text" placeholder="Digite Dirección" class="form-control" style="width:90%;">
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Propietario</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnRegistrar" type="submit" asp-page-handler="insert" class="btn btn-dark btn-sm" style="display: block;">Registrar Propietario</button>             
+                <button id="btnActualizar" type="submit" asp-route-id="propietario.Id" asp-page-handler="update" class="btn btn-dark btn-sm" onclick="MensajeActualizar();" style="display: none;">Guardar Cambios</button> 
                 <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
-            </div>
-            
-            
-        </form>
-    </div>
+            </div>                                
+        </div>
 
-    <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
-        <h1>Listado de Propietarios</h1>
-        <table class="table">
-            <tr style="background-color: rgb(153,102,153);">
-                <td>Nombre</td>
-                <td>Apellido</td>
-                <td>Documento</td>
-                <td>Telefono</td>
-                <td>Direccion</td>
-                <td></td>
-                <td></td>
-            </tr>
-            @foreach (var propietario in Model.listadoPropietarios)
-            {
-                <tr>
-                    <td>@propietario.Nombre</td>
-                    <td>@propietario.Apellido</td>
-                    <td>@propietario.Documento</td>
-                    <td>@propietario.Telefono</td>
-                    <td>@propietario.Direccion</td>
-                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@propietario.Nombre','@propietario.Apellido','@propietario.Documento','@propietario.Telefono','@propietario.Direccion');"></div></td>
-                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>
+        <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+            <h1>Listado de Propietarios</h1>
+            <table class="table">
+                <tr style="background-color: rgb(153,102,153);">
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Documento</td>
+                    <td>Telefono</td>
+                    <td>Direccion</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            }
-        </table>
-    </div>
+                @foreach (var propietario in Model.listadoPropietarios)
+                {
+                    <tr>
+                        <td>@propietario.Nombre</td>
+                        <td>@propietario.Apellido</td>
+                        <td>@propietario.Documento</td>
+                        <td>@propietario.Telefono</td>
+                        <td>@propietario.Direccion</td>
+                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@propietario.Id','@propietario.Nombre','@propietario.Apellido','@propietario.Documento','@propietario.Telefono','@propietario.Direccion');"></div></td>
+                        <td><div><button id="btnEliminar" asp-route-id="@propietario.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
 </div>
 
 <script>
@@ -77,22 +79,24 @@
     }
 
     function LimpiarDatos(){
+        $("#id").val('');
         $("#nombre").val('');
         $("#apellido").val('');
         $("#documento").val('');
         $("#telefono").val('');
         $("#direccion").val('');
-        $("btnRegistrar").css('display','block');
-        $("btnActualizar").css('display','none');
+        $("#btnRegistrar").css('display','block');
+        $("#btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nombre, Apellido, Documento, Telefono, Direccion){        
+    function CargarDatos(Id, Nombre, Apellido, Documento, Telefono, Direccion){    
+        $("#id").val(Id);    
         $("#nombre").val(Nombre);
         $("#apellido").val(Apellido);
         $("#documento").val(Documento);
         $("#telefono").val(Telefono);
         $("#direccion").val(Direccion);
-        $("btnRegistrar").css('display','none');
-        $("btnActualizar").css('display','block');
+        $("#btnRegistrar").css('display','none');
+        $("#btnActualizar").css('display','block');
     }
 </script>

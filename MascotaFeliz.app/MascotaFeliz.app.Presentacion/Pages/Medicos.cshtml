@@ -1,82 +1,88 @@
 ﻿@page
 @model MascotaFeliz.app.Presentacion.Pages.MedicosModel
 @{
+    ViewData["Title"] = "Medicos";
 }
 
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
-    <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Nuevo Registro</h1>
-        </hr>
-        <form method="POST">
+    <form method="POST">
+        <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+            <h1>Nuevo Registro</h1>
+            </hr>     
+            <!-- campo oculto con el id de la entidad que se va a actualizar -->
+            <input id="id" type="hidden" asp-for="medico.Id" class="form-control"/>
+
             <div class="form-group">
-                <label>Nombre: </label>
+                <label asp-for="medico.Nombre">Nombre: </label>
                 <input id="nombre" asp-for="medico.Nombre" type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Apellido: </label>
+                <label asp-for="medico.Apellido">Apellido: </label>
                 <input id="apellido" asp-for="medico.Apellido" type="text" placeholder="Digite Apellido" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Documento de identidad: </label>
+                <label asp-for="medico.Documento">Documento de identidad: </label>
                 <input id="documento" asp-for="medico.Documento" type="text" placeholder="Digite Documento" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Telefono: </label>
+                <label asp-for="medico.Telefono">Telefono: </label>
                 <input id="telefono" asp-for="medico.Telefono" type="text" placeholder="Digite Telefono" class="form-control" style="width:90%;">
             </div>    
             <div class="form-group">
-                <label>Tarjeta Profesional: </label>
+                <label asp-for="medico.TarjetaProfesional">Tarjeta Profesional: </label>
                 <input id="tarjetaProfesional" asp-for="medico.TarjetaProfesional" type="text" placeholder="Digite Tarjeta Profesional" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Especialización: </label>
-                <<input id="especializacion" asp-for="medico.Especializacion" type="text" placeholder="Digite Especializacion" class="form-control" style="width:90%;">>
+                <label asp-for="medico.Especializacion">Especialización: </label>
+                <select id="especializacion" asp-items='@new SelectList(Model.listaTiposAnimales,"Id","Nombre")' asp-for="medico.Especializacion" class="form-control">
+                    <option value="">Seleccione una especialidad</option>                    
+                </select>
             </div>
             <div class="form-group">
-                <label>Centro Veterinario donde labora: </label>
-                <input id="idCentroVeterinario" asp-for="medico.IdCentroVeterinario" type="text" placeholder="Digite Centro Veterinario" class="form-control" style="width:90%;">
+                <label asp-for="medico.IdCentroVeterinario">Centro Veterinario donde labora: </label>
+                <select id="centroVeterinario" asp-items='@new SelectList(Model.listaCentrosVeterinarios,"Id","Nombre")' asp-for="medico.IdCentroVeterinario" class="form-control">
+                    <option value="">Seleccione un Centro Veterinario</option>                    
+                </select>
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Medico</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnRegistrar" type="submit" asp-page-handler="insert" class="btn btn-dark btn-sm" style="display: block;">Registrar Medico</button>             
+                <button id="btnActualizar" type="submit" asp-route-id="empresa.Id" asp-page-handler="update" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
                 <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
-            </div>
-            
-            
-        </form>
-    </div>
+            </div>                        
+        </div>
 
-    <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
-        <h1>Listado de Medicos</h1>
-        <table class="table">
-            <tr style="background-color: rgb(153,102,153);">                
-                <td>Nombre</td>
-                <td>Apellido</td>
-                <td>Documento</td>
-                <td>Telefono</td>
-                <td>Tarjeta Profesional</td>
-                <td>Especialización</td>
-                <td>Centro Veterinario</td>
-                <td></td>
-                <td></td>
-            </tr>
-            @foreach (var medico in Model.listadoMedicos)
-            {
-                <tr>
-                    <td>@medico.Nombre</td>
-                    <td>@medico.Apellido</td>
-                    <td>@medico.Documento</td>
-                    <td>@medico.Telefono</td>
-                    <td>@medico.TarjetaProfesional</td>
-                    <td>@medico.Especializacion</td>
-                    <td>@medico.IdCentroVeterinario</td>
-                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@medico.Nombre','@medico.Apellido','@medico.Documento','@medico.Telefono','@medico.TarjetaProfesional','@medico.Especializacion','@medico.IdCentroVeterinario');"></div></td>
-                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>                
+        <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+            <h1>Listado de Medicos</h1>
+            <table class="table">
+                <tr style="background-color: rgb(153,102,153);">                
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Documento</td>
+                    <td>Telefono</td>
+                    <td>Tarjeta Profesional</td>
+                    <td>Especialización</td>
+                    <td>Centro Veterinario</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            }
-        </table>
-    </div>
+                @foreach (var medico in Model.listadoMedicos)
+                {
+                    <tr>
+                        <td>@medico.Nombre</td>
+                        <td>@medico.Apellido</td>
+                        <td>@medico.Documento</td>
+                        <td>@medico.Telefono</td>
+                        <td>@medico.TarjetaProfesional</td>
+                        <td>@medico.Especializacion</td>
+                        <td>@medico.IdCentroVeterinario</td>
+                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@medico.Id','@medico.Nombre','@medico.Apellido','@medico.Documento','@medico.Telefono','@medico.TarjetaProfesional','@medico.Especializacion','@medico.IdCentroVeterinario');"></div></td>
+                        <td><div><button id="btnEliminar" asp-route-id="@medico.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
 </div>
 
 <script>
@@ -89,6 +95,7 @@
     }
 
     function LimpiarDatos(){
+        $("#id").val('');
         $("#nombre").val('');
         $("#apellido").val('');
         $("#documento").val('');
@@ -96,11 +103,12 @@
         $("#tarjetaProfesional").val('');
         $("#especializacion").val('');
         $("#idCentroVeterinario").val('');
-        $("btnRegistrar").css('display','block');
-        $("btnActualizar").css('display','none');
+        $("#btnRegistrar").css('display','block');
+        $("#btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nombre, Apellido, Documento, Telefono, TarjetaProfesional, Especializacion, IdCentroVeterinario){
+    function CargarDatos(Id, Nombre, Apellido, Documento, Telefono, TarjetaProfesional, Especializacion, IdCentroVeterinario){
+        $("#id").val(Id);
         $("#nombre").val(Nombre);
         $("#apellido").val(Apellido);
         $("#documento").val(Documento);
@@ -108,7 +116,7 @@
         $("#tarjetaProfesional").val(TarjetaProfesional);
         $("#especializacion").val(Especializacion);
         $("#idCentroVeterinario").val(IdCentroVeterinario);
-        $("btnRegistrar").css('display','none');
-        $("btnActualizar").css('display','block');
+        $("#btnRegistrar").css('display','none');
+        $("#btnActualizar").css('display','block');
     }
 </script>

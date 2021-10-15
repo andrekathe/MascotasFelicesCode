@@ -14,7 +14,7 @@ namespace MascotaFeliz.app.Console
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
-            AddDatosEmpresa();
+            AddDatos();
             //DeleteDato();
             GetTodo();
             //GetMedico(1);

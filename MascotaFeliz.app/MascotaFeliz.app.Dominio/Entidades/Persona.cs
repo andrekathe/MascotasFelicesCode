@@ -4,10 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MascotaFeliz.app.Dominio.Entidades
-{
-    [Table("Persona")]
-    public class Persona
-    {
+{    
+    public abstract class Persona
+    {        
         [Column("Id")]
         [Key]
         public int Id { get; set; }

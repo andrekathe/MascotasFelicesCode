@@ -1,94 +1,100 @@
 ﻿@page
 @model MascotaFeliz.app.Presentacion.Pages.MascotasModel
 @{
+    ViewData["Title"] = "Mascotas";
 }
 
 <div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
-    <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
-        <h1>Nuevo Registro</h1>
-        </hr>
-        <form method="POST">
+    <form method="POST">
+        <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+            <h1>Nuevo Registro</h1>
+            </hr>        
+            <!-- campo oculto con el id de la entidad que se va a actualizar -->
+            <input id="id" type="hidden" asp-for="mascota.Id" class="form-control"/>
+
             <div class="form-group">
-                <label>Nombre: </label>
+                <label asp-for="mascota.Nombre">Nombre: </label>
                 <input id="nombre" asp-for="mascota.Nombre" type="text" placeholder="Digite Nombre" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Color de ojos: </label>
+                <label asp-for="mascota.ColorOjos">Color de ojos: </label>
                 <input id="colorOjos" asp-for="mascota.ColorOjos" type="text" placeholder="Digite Color Ojos" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Color de piel: </label>
+                <label asp-for="mascota.ColorPiel">Color de piel: </label>
                 <input id="colorPiel" asp-for="mascota.ColorPiel" type="text" placeholder="Digite Color Piel" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Estatura: </label>
+                <label asp-for="mascota.Estatura">Estatura (cm): </label>
                 <input id="estatura" asp-for="mascota.Estatura" type="text" placeholder="Digite Estatura" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Peso: </label>
+                <label asp-for="mascota.Peso">Peso (kg): </label>
                 <input id="peso" asp-for="mascota.Peso" type="text" placeholder="Digite Peso" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Raza: </label>
+                <label asp-for="mascota.Raza">Raza: </label>
                 <input id="raza" asp-for="mascota.Raza" type="text" placeholder="Digite Raza" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Sexo: </label>
+                <label asp-for="mascota.Sexo">Sexo: </label>
                 <input id="sexo" asp-for="mascota.Sexo" type="text" placeholder="Digite Sexo" class="form-control" style="width:90%;">
             </div>
             <div class="form-group">
-                <label>Propietario: </label>
-                <input id="propietario" asp-for="mascota.IdPropietario" type="text" placeholder="Digite Propietario" class="form-control" style="width:90%;">
+                <label asp-for="mascota.IdPropietario">Propietario: </label>                
+                <select id="propietario" asp-items='@new SelectList(Model.listaPropietarios,"Id","Nombre")' asp-for="mascota.IdPropietario" class="form-control">
+                    <option value="">Seleccione un Propietario</option>                    
+                </select>
             </div>
             <div class="form-group">
-                <label>Tipo de animal: </label>
-                <input id="tipoAnimal" asp-for="mascota.TipoAnimal" type="text" placeholder="Digite Tipo Animal" class="form-control" style="width:90%;">
+                <label asp-for="mascota.TipoAnimal">Tipo de animal: </label>
+                <select id="tipoAnimal" asp-items='@new SelectList(Model.listaTiposAnimales,"Id","Nombre")' asp-for="mascota.TipoAnimal" class="form-control">
+                    <option value="">Seleccione un Tipo de Animal</option>                    
+                </select>                
             </div>
             <br>
             <div>
-                <button id="btnRegistrar" type="submit" class="btn btn-dark btn-sm" style="display: block;">Registrar Mascota</button>             
-                <button id="btnActualizar" type="submit" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnRegistrar" type="submit" asp-page-handler="insert" class="btn btn-dark btn-sm" style="display: block;">Registrar Mascota</button>             
+                <button id="btnActualizar" type="submit" asp-route-id="empresa.Id" asp-page-handler="update" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
                 <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
-            </div>
-            
-            
-        </form>
-    </div>
+            </div>                                          
+        </div>
 
-    <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
-        <h1>Listado de Mascotas</h1>
-        <table class="table">
-            <tr style="background-color: rgb(153,102,153);">
-                <td>Nommbre</td>
-                <td>Color de ojos</td>
-                <td>Color de piel</td>
-                <td>Estatura</td>
-                <td>Peso</td>
-                <td>Raza</td>
-                <td>Sexo</td>
-                <td>Propietario</td>
-                <td>Tipo de animal</td>
-                <td></td>
-                <td></td>
-            </tr>
-            @foreach (var mascota in Model.listaMascotas)
-            {
-                <tr>
-                    <td>@mascota.Nombre</td>
-                    <td>@mascota.ColorOjos</td>
-                    <td>@mascota.ColorPiel</td>
-                    <td>@mascota.Estatura</td>
-                    <td>@mascota.Peso</td>
-                    <td>@mascota.Raza</td>
-                    <td>@mascota.Sexo</td>
-                    <td>@mascota.IdPropietario</td>
-                    <td>@mascota.TipoAnimal</td>
-                    <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@mascota.Nombre','@mascota.ColorOjos','@mascota.ColorPiel','@mascota.Estatura','@mascota.Peso','@mascota.Raza','@mascota.Sexo','@mascota.IdPropietario','@mascota.TipoAnimal');"></div></td>
-                    <td><div><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></div></td>                               
+        <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+            <h1>Listado de Mascotas</h1>
+            <table class="table">
+                <tr style="background-color: rgb(153,102,153);">
+                    <td>Nommbre</td>
+                    <td>Color de ojos</td>
+                    <td>Color de piel</td>
+                    <td>Estatura</td>
+                    <td>Peso</td>
+                    <td>Raza</td>
+                    <td>Sexo</td>
+                    <td>Propietario</td>
+                    <td>Tipo de animal</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-            }
-        </table>
-    </div>
+                @foreach (var mascota in Model.listaMascotas)
+                {
+                    <tr>
+                        <td>@mascota.Nombre</td>
+                        <td>@mascota.ColorOjos</td>
+                        <td>@mascota.ColorPiel</td>
+                        <td>@mascota.Estatura</td>
+                        <td>@mascota.Peso</td>
+                        <td>@mascota.Raza</td>
+                        <td>@mascota.Sexo</td>
+                        <td>@mascota.IdPropietario</td>
+                        <td>@mascota.TipoAnimal</td>
+                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@mascota.Id','@mascota.Nombre','@mascota.ColorOjos','@mascota.ColorPiel','@mascota.Estatura','@mascota.Peso','@mascota.Raza','@mascota.Sexo','@mascota.IdPropietario','@mascota.TipoAnimal');"></div></td>
+                        <td><div><button id="btnEliminar" asp-route-id="@mascota.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
 </div>
 
 <script>
@@ -101,6 +107,7 @@
     }
 
     function LimpiarDatos(){
+        $("#id").val('');
         $("#nombre").val('');
         $("#colorOjos").val('');
         $("#colorPiel").val('');
@@ -110,11 +117,12 @@
         $("#sexo").val('');
         $("#propietario").val('');
         $("#tipoAnimal").val('');
-        $("btnRegistrar").css('display','block');
-        $("btnActualizar").css('display','none');
+        $("#btnRegistrar").css('display','block');
+        $("#btnActualizar").css('display','none');
     }
 
-    function CargarDatos(Nombre, ColorOjos, ColorPiel, Estatura, Peso, Raza, Sexo, IdPropietario, TipoAnimal){
+    function CargarDatos(Id, Nombre, ColorOjos, ColorPiel, Estatura, Peso, Raza, Sexo, IdPropietario, TipoAnimal){
+        $("#id").val(Id);
         $("#nombre").val(Nombre);
         $("#colorOjos").val(ColorOjos);
         $("#colorPiel").val(ColorPiel);
@@ -124,7 +132,7 @@
         $("#sexo").val(Sexo);
         $("#propietario").val(IdPropietario);
         $("#tipoAnimal").val(TipoAnimal);
-        $("btnRegistrar").css('display','none');
-        $("btnActualizar").css('display','block');
+        $("#btnRegistrar").css('display','none');
+        $("#btnActualizar").css('display','block');
     }
 </script>

@@ -26,10 +26,15 @@ namespace MascotaFeliz.app.Presentacion.Pages
             listaCentrosVeterinarios= repositorioCentroVeterinario.GetAllCentrosVeterinarios();
         }
 
-        public IActionResult OnPost()
+        public void OnPost()
         {
-            CentroVeterinario empresaPost = new CentroVeterinario();      
-            empresaPost = repositorioCentroVeterinario.AddCentroVeterinario(empresa);                           
+            listaCentrosVeterinarios= repositorioCentroVeterinario.GetAllCentrosVeterinarios();
+        }
+
+        public IActionResult OnPostInsert()
+        {
+            CentroVeterinario empresaPost = new CentroVeterinario(); 
+            empresaPost = repositorioCentroVeterinario.AddCentroVeterinario(empresa);                                                     
                 
             if(empresaPost != null)
                 return RedirectToPage("./CentroVeterinario");

@@ -28,7 +28,12 @@ namespace MascotaFeliz.app.Presentacion.Pages
             listadoPropietarios = repositorioPropietario.GetAllPropietarios();
         }   
 
-        public IActionResult OnPost()
+        public void OnPost()
+        {
+            listadoPropietarios = repositorioPropietario.GetAllPropietarios();
+        }   
+
+        public IActionResult OnPostInsert()
         {
             Propietario propietarioPost = new Propietario();      
             propietarioPost = repositorioPropietario.AddPropietario(propietario);                           
@@ -39,10 +44,25 @@ namespace MascotaFeliz.app.Presentacion.Pages
                 return RedirectToPage("./Error1");
             
         } 
-/*
-        public void OnPost()
-        {
-            Propietarios=repositorioPropietario.UpdatePropietario(Propietario);
-        }   
-  */  }
+
+        public IActionResult OnPostUpdate()
+        {            
+            Propietario propietarioPost = new Propietario();                        
+            propietarioPost = repositorioPropietario.UpdatePropietario(propietario);
+            if(propietarioPost != null)
+            {
+                return RedirectToPage("./Propietarios");
+            }        
+            else
+            {
+                return RedirectToPage("./Error1");
+            }
+        }
+
+        public IActionResult OnPostDelete(int id)
+        {            
+                repositorioPropietario.DeletePropietario(id);
+                return RedirectToPage("./Propietarios");            
+        }
+    }
 }

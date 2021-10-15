@@ -8,11 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace MascotaFeliz.app.Presentacion.Pages
 {
-    public class PrivacyModel : PageModel
+    public class Error1Model : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<Error1Model> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public Error1Model(ILogger<Error1Model> logger)
         {
             _logger = logger;
         }

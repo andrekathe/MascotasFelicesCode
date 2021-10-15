@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MascotaFeliz.app.Persistencia.Migrations
 {
-    public partial class Primera : Migration
+    public partial class primera : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace MascotaFeliz.app.Persistencia.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nit = table.Column<int>(type: "int", maxLength: 10, nullable: false),
+                    Nit = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -23,11 +23,12 @@ namespace MascotaFeliz.app.Persistencia.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Persona",
+                name: "Propietario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DocumentoIdentidad = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
@@ -35,7 +36,7 @@ namespace MascotaFeliz.app.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persona", x => x.Id);
+                    table.PrimaryKey("PK_Propietario", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,24 +73,6 @@ namespace MascotaFeliz.app.Persistencia.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Propietario",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Propietario", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Propietario_Persona_Id",
-                        column: x => x.Id,
-                        principalTable: "Persona",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Mascota",
                 columns: table => new
                 {
@@ -120,20 +103,19 @@ namespace MascotaFeliz.app.Persistencia.Migrations
                 name: "Medico",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TarjetaProfesional = table.Column<int>(type: "int", nullable: false),
                     IdTipoAnimal = table.Column<int>(type: "int", nullable: true),
-                    IdCentroVeterinario = table.Column<int>(type: "int", nullable: false)
+                    IdCentroVeterinario = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DocumentoIdentidad = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medico", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Medico_Persona_Id",
-                        column: x => x.Id,
-                        principalTable: "Persona",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Medico_TipoAnimal_IdTipoAnimal",
                         column: x => x.IdTipoAnimal,
@@ -200,9 +182,6 @@ namespace MascotaFeliz.app.Persistencia.Migrations
 
             migrationBuilder.DropTable(
                 name: "VisitaProgramada");
-
-            migrationBuilder.DropTable(
-                name: "Persona");
 
             migrationBuilder.DropTable(
                 name: "TipoAnimal");

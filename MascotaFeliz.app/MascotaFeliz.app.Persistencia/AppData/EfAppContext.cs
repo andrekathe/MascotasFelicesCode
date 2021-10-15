@@ -4,8 +4,7 @@ using MascotaFeliz.app.Dominio.Entidades;
 
 namespace MascotaFeliz.app.Persistencia.AppData{
     public class EfAppContext:DbContext
-    {
-        public DbSet<Persona> Personas {get; set;}
+    {        
         public DbSet<Propietario> Propietarios {get; set;}
         public DbSet<Medico> Medicos {get; set;}
         public DbSet<Mascota> Mascotas {get; set;}       
@@ -21,7 +20,7 @@ namespace MascotaFeliz.app.Persistencia.AppData{
             {
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-3JED4U8\\SQLEXPRESS;Initial Catalog=MascotaFeliz;integrated security = true");
             }
-        }
+        }     
 
         public EfAppContext(){}
     }

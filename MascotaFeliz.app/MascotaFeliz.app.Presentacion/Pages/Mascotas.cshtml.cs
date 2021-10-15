@@ -12,25 +12,44 @@ namespace MascotaFeliz.app.Presentacion.Pages
     public class MascotasModel : PageModel
     {
         private readonly IRepositorioMascota repositorioMascota;
+        private readonly IRepositorioTipoAnimal repositorioTipoAnimal;
+        private readonly IRepositorioPropietario repositorioPropietario;
         public IEnumerable<Mascota> listaMascotas = new List<Mascota>();
+        public IEnumerable<TipoAnimal> listaTiposAnimales = new List<TipoAnimal>();
+        public IEnumerable<Propietario> listaPropietarios = new List<Propietario>();
 
         [BindProperty]
-        public Mascota mascota {get; set;}
+        public Mascota mascota {get; set;} 
+        [BindProperty]
+        public int id {get; set;}          
 
-        public MascotasModel(IRepositorioMascota repositorioMascota)
+        public MascotasModel(IRepositorioMascota repositorioMascota, IRepositorioTipoAnimal repositorioTipoAnimal, IRepositorioPropietario repositorioPropietario)
         {
             this.repositorioMascota=repositorioMascota;
+            this.repositorioTipoAnimal= repositorioTipoAnimal; //para el combo de tipo animal
+            this.repositorioPropietario=repositorioPropietario; //para el combo de propietario
         }
 
         //Inicializador de la página
-        public void OnGet()
+        public async Task OnGet()
         {
             listaMascotas = repositorioMascota.GetAllMascotas();
+            listaTiposAnimales = repositorioTipoAnimal.GetAllTiposAnimales();
+            listaPropietarios = repositorioPropietario.GetAllPropietarios();
         }
 
-        public IActionResult OnPost()
+        public async Task OnPost()
         {
-            Mascota mascotaPost = new Mascota();      
+            listaMascotas = repositorioMascota.GetAllMascotas();
+            listaTiposAnimales = repositorioTipoAnimal.GetAllTiposAnimales();
+            listaPropietarios = repositorioPropietario.GetAllPropietarios();
+        }
+
+        public IActionResult OnPostInsert()
+        {
+            Mascota mascotaPost = new Mascota();
+            TipoAnimal tipoAnimal = repositorioTipoAnimal.GetTipoAnimal(id);
+            mascota.TipoAnimal=tipoAnimal;               
             mascotaPost = repositorioMascota.AddMascota(mascota);                           
                 
             if(mascotaPost != null)
@@ -38,6 +57,28 @@ namespace MascotaFeliz.app.Presentacion.Pages
             else
                 return RedirectToPage("./Error1");
             
+        }
+
+        public IActionResult OnPostUpdate()
+        {            
+            Mascota mascotaPost = new Mascota();  
+            TipoAnimal tipoAnimal = repositorioTipoAnimal.GetTipoAnimal(id);
+            mascota.TipoAnimal=tipoAnimal;                          
+            mascotaPost = repositorioMascota.UpdateMascota(mascota);
+            if(mascotaPost != null)
+            {
+                return RedirectToPage("./Mascotas");
+            }        
+            else
+            {
+                return RedirectToPage("./Error1");
+            }
+        }
+
+        public IActionResult OnPostDelete(int id)
+        {            
+                repositorioMascota.DeleteMascota(id);
+                return RedirectToPage("./Mascotas");            
         }
     }
 }

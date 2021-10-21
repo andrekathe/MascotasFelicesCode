@@ -51,9 +51,10 @@ namespace MascotaFeliz.app.Persistencia.AppRepositorios
             }
         }
 
-        RegistroVisita IRepositorioRegistroVisita.GetRegistroVisita (int idRegistroVisita){
+        //busca por el id de la solicitud de la visita
+        RegistroVisita IRepositorioRegistroVisita.GetRegistroVisita (int IdVisitaProgramada){
             using(AppData.EfAppContext Contexto = new AppData.EfAppContext()){
-                return Contexto.RegistrosVisitas.FirstOrDefault(r=> r.Id==idRegistroVisita);
+                return Contexto.RegistrosVisitas.FirstOrDefault(r=> r.IdVisitaProgramada==IdVisitaProgramada);
             }
         }
     }

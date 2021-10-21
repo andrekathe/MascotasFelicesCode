@@ -1,0 +1,128 @@
+﻿@page
+@model MascotaFeliz.app.Presentacion.Pages.RegistrarVisitaModel
+@{
+    ViewData["Title"] = "Registro de Visitas";
+}
+
+<div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
+    <form method="POST">
+        <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+            <h1>Nuevo Registro</h1>
+            </hr>     
+            <!-- campo oculto con el id de la entidad que se va a actualizar -->
+            <input id="id" type="hidden" asp-for="visita.Id" class="form-control"/>
+
+            <div class="form-group">
+                <label asp-for="visita.IdVisitaProgramada">Codigo solicitud de visita: </label>
+                <select id="visitaProgramada" asp-items='@new SelectList(Model.listadoSolicitudesVisita,"Id","Id")' asp-for="visita.IdVisitaProgramada" class="form-control">
+                    <option value="">Seleccione una visita</option>                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.Temperatura">Temperatura: </label>
+                <input id="temperatura" asp-for="visita.Temperatura" type="text" placeholder="Digite Temperatura" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.Peso">Peso: </label>
+                <input id="peso" asp-for="visita.Peso" type="text" placeholder="Digite Peso" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.FrecuenciaRespiratoria">Frecuencia Respiratoria: </label>
+                <input id="frecuenciaRespiratoria" asp-for="visita.FrecuenciaRespiratoria" type="text" placeholder="Digite Frecuencia Respiratoria" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.FrecuenciaCardiaca">Frecuencia Cardiaca: </label>
+                <input id="frecuenciaCardiaca" asp-for="visita.FrecuenciaCardiaca" type="text" placeholder="Digite Frecuencia Cardiaca" class="form-control" style="width:90%;">
+            </div>    
+            <div class="form-group">
+                <label asp-for="visita.EstadoAnimo">Estado de Animo: </label>
+                <input id="estadoAnimo" asp-for="visita.EstadoAnimo" type="text" placeholder="Digite Estado de Animo" class="form-control" style="width:90%;">
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.Recomendacion">Recomendaciones: </label>
+                <input id="recomendaciones" asp-for="visita.Recomendacion" type="text" placeholder="Digite Recomendaciones" class="form-control" style="width:90%;">
+            </div>    
+            <div class="form-group">
+                <label asp-for="visita.Medicamentos">Medicamentos: </label>
+                <input id="medicamentos" asp-for="visita.Medicamentos" type="text" placeholder="Digite Medicamentos" class="form-control" style="width:90%;">
+            </div>     
+            <br>
+            <div>
+                <button id="btnRegistrar" type="submit" asp-page-handler="insert" class="btn btn-dark btn-sm" style="display: block;">Registrar Visita</button>             
+                <button id="btnActualizar" type="submit" asp-route-id="visita.Id" asp-page-handler="update" class="btn btn-dark btn-sm" onclick="MensajeActualizar();" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
+            </div>                        
+        </div>
+
+        <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+            <h1>Listado de Registros de Visitas</h1>
+            <table class="table">
+                <tr style="background-color: rgb(153,102,153);">                
+                    <td>Id Visita</td>
+                    <td>Temperatura</td>
+                    <td>Peso</td>
+                    <td>Frecuencia Respiratoria</td>
+                    <td>Frecuencia Cardiaca</td>
+                    <td>Estado de Animo</td>
+                    <td>Recomendaciones</td>
+                    <td>Medicamentos</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @foreach (var visitaM in Model.listadoRegistrosVisitas)
+                {
+                    <tr>
+                        <td>@visitaM.IdVisitaProgramada</td>
+                        <td>@visitaM.Temperatura</td>
+                        <td>@visitaM.Peso</td>
+                        <td>@visitaM.FrecuenciaRespiratoria</td>
+                        <td>@visitaM.FrecuenciaCardiaca</td>
+                        <td>@visitaM.EstadoAnimo</td>
+                        <td>@visitaM.Recomendacion</td>
+                        <td>@visitaM.Medicamentos</td>
+                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@visitaM.Id','@visitaM.IdVisitaProgramada','@visitaM.Temperatura','@visitaM.Peso','@visitaM.FrecuenciaRespiratoria','@visitaM.FrecuenciaCardiaca','@visitaM.EstadoAnimo','@visitaM.Recomendacion','@visitaM.Medicamentos');"></div></td>
+                        <td><div><button id="btnEliminar" asp-route-id="@visitaM.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
+</div>
+
+<script>
+    function MensajeActualizar(){
+        confirm("¿Esta seguro que desea actualizar el Registro de la visita?");
+    }
+
+    function MensajeEliminar(){
+        confirm("¿Esta seguro que desea eliminar el Registro de la visita?");
+    }
+
+    function LimpiarDatos(){
+        $("#id").val('');
+        $("#visitaProgramada").val('');
+        $("#temperatura").val('');
+        $("#peso").val('');
+        $("#frecuenciaRespiratoria").val('');
+        $("#frecuenciaCardiaca").val('');
+        $("#estadoAnimo").val('');
+        $("#recomendaciones").val('');
+        $("#medicamentos").val('');
+        $("#btnRegistrar").css('display','block');
+        $("#btnActualizar").css('display','none');
+    }
+
+    function CargarDatos(Id, IdVisitaProgramada, Temperatura, Peso, FrecuenciaRespiratoria, FrecuenciaCardiaca, EstadoAnimo, Recomendaciones, Medicamentos){
+        $("#id").val(Id);
+        $("#visitaProgramada").val(IdVisitaProgramada);
+        $("#temperatura").val(Temperatura);
+        $("#peso").val(Peso);
+        $("#frecuenciaRespiratoria").val(FrecuenciaRespiratoria);
+        $("#frecuenciaCardiaca").val(FrecuenciaCardiaca);
+        $("#estadoAnimo").val(EstadoAnimo);
+        $("#recomendaciones").val(Recomendaciones);
+        $("#medicamentos").val(Medicamentos);
+        $("#btnRegistrar").css('display','none');
+        $("#btnActualizar").css('display','block');
+    }
+</script>

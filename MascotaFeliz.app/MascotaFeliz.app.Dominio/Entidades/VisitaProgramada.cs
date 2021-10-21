@@ -19,7 +19,7 @@ namespace MascotaFeliz.app.Dominio.Entidades
         public virtual int IdPropietario { get; set; }
 
         [ForeignKey("IdTipoAnimal")]
-        public virtual TipoAnimal TipoAnimal { get; set; }
+        public virtual int TipoAnimal { get; set; }
 
         [Column("Fecha")]
         [Required]

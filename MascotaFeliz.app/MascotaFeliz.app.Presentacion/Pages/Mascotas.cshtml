@@ -55,7 +55,7 @@
             <br>
             <div>
                 <button id="btnRegistrar" type="submit" asp-page-handler="insert" class="btn btn-dark btn-sm" style="display: block;">Registrar Mascota</button>             
-                <button id="btnActualizar" type="submit" asp-route-id="empresa.Id" asp-page-handler="update" class="btn btn-dark btn-sm" style="display: none;">Guardar Cambios</button> 
+                <button id="btnActualizar" type="submit" asp-route-id="mascota.Id" asp-page-handler="update" class="btn btn-dark btn-sm" onclick="MensajeActualizar();" style="display: none;">Guardar Cambios</button> 
                 <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
             </div>                                          
         </div>
@@ -76,20 +76,20 @@
                     <td></td>
                     <td></td>
                 </tr>
-                @foreach (var mascota in Model.listaMascotas)
+                @foreach (var mascotaM in Model.listaMascotas)
                 {
                     <tr>
-                        <td>@mascota.Nombre</td>
-                        <td>@mascota.ColorOjos</td>
-                        <td>@mascota.ColorPiel</td>
-                        <td>@mascota.Estatura</td>
-                        <td>@mascota.Peso</td>
-                        <td>@mascota.Raza</td>
-                        <td>@mascota.Sexo</td>
-                        <td>@mascota.IdPropietario</td>
-                        <td>@mascota.TipoAnimal</td>
-                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@mascota.Id','@mascota.Nombre','@mascota.ColorOjos','@mascota.ColorPiel','@mascota.Estatura','@mascota.Peso','@mascota.Raza','@mascota.Sexo','@mascota.IdPropietario','@mascota.TipoAnimal');"></div></td>
-                        <td><div><button id="btnEliminar" asp-route-id="@mascota.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
+                        <td>@mascotaM.Nombre</td>
+                        <td>@mascotaM.ColorOjos</td>
+                        <td>@mascotaM.ColorPiel</td>
+                        <td>@mascotaM.Estatura</td>
+                        <td>@mascotaM.Peso</td>
+                        <td>@mascotaM.Raza</td>
+                        <td>@mascotaM.Sexo</td>
+                        <td>@mascotaM.IdPropietario</td>
+                        <td>@mascotaM.TipoAnimal</td>
+                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@mascotaM.Id','@mascotaM.Nombre','@mascotaM.ColorOjos','@mascotaM.ColorPiel','@mascotaM.Estatura','@mascotaM.Peso','@mascotaM.Raza','@mascotaM.Sexo','@mascotaM.IdPropietario','@mascotaM.TipoAnimal');"></div></td>
+                        <td><div><button id="btnEliminar" asp-route-id="@mascotaM.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>
                     </tr>
                 }
             </table>

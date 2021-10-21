@@ -1,0 +1,113 @@
+﻿@page
+@model MascotaFeliz.app.Presentacion.Pages.ProgramarVisitaModel
+@{
+    ViewData["Title"] = "Solicitar Visita Domiciliaria";
+}
+
+<div id="principal" style="width: 100%; display: table; border-spacing: 10px; background-color: #FFFFFF; border-radius:22px;">
+    <form method="POST">
+        <div id="izquierda" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 20px; background-color: #D7BDE2; border-radius:22px;">
+            <h1>Programe su visita</h1>
+            </hr>     
+            <!-- campo oculto con el id de la entidad que se va a actualizar -->
+            <input id="id" type="hidden" asp-for="visita.Id" class="form-control"/>
+
+            <div class="form-group">
+                <label asp-for="visita.IdPropietario">Propietario: </label>
+                <select id="propietario" asp-items='@new SelectList(Model.listaPropietarios,"Id","Nombre")' asp-for="visita.IdPropietario" class="form-control">
+                    <option value="">Seleccione un propietario</option>                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.IdMascota">Mascota: </label>
+                <select id="mascota" asp-items='@new SelectList(Model.listaMascotas,"Id","Nombre")' asp-for="visita.IdMascota" class="form-control">
+                    <option value="">Seleccione una Mascota</option>                    
+                </select>
+            </div>            
+            <div class="form-group">
+                <label asp-for="visita.TipoAnimal">Tipo de Animal: </label>
+                <select id="tipoAnimal" asp-items='@new SelectList(Model.listaTiposAnimales,"Id","Nombre")' asp-for="visita.TipoAnimal" class="form-control">
+                    <option value="">Seleccione un tipo de animal</option>                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.IdMedico">Medico: </label>
+                <select id="medico" asp-items='@new SelectList(Model.listadoMedicos,"Id","Nombre")' asp-for="visita.IdMedico" class="form-control">
+                    <option value="">Seleccione un medico</option>                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="visita.Fecha">Fecha de la visita: </label>
+                <input id="fecha" asp-for="visita.Fecha" type="datetime-local" placeholder="Elija Fecha y hora" class="form-control" style="width:90%;">
+            </div>            
+            <br>
+            <div>
+                <button id="btnRegistrar" type="submit" asp-page-handler="insert" class="btn btn-dark btn-sm" style="display: block;">Programar Visita</button>             
+                <button id="btnActualizar" type="submit" asp-route-id="visita.Id" asp-page-handler="update" class="btn btn-dark btn-sm" onclick="MensajeActualizar();" style="display: none;">Guardar Cambios</button> 
+                <button id="btnCancelar" type="submit" class="btn btn-dark btn-sm" onclick="LimpiarDatos();">Cancelar</button> 
+            </div>                        
+        </div>
+
+        <div id="derecha" style="border=gray 1px solid; width: 50%; display: table-cell; padding: 6px;">
+            <h1>Listado de Visitas Programadas</h1>
+            <table class="table">
+                <tr style="background-color: rgb(153,102,153);">   
+                    <td>Codigo de Visita</td>                                 
+                    <td>Propietario</td>
+                    <td>Mascota</td>
+                    <td>Tipo de Animal</td>
+                    <td>Medico</td>
+                    <td>Fecha</td>                    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @foreach (var visitaM in Model.listadoSolicitudesVisita)
+                {
+                    <tr>                        
+                        <td>@visitaM.Id</td>
+                        <td>@visitaM.IdPropietario</td>
+                        <td>@visitaM.IdMascota</td>
+                        <td>@visitaM.TipoAnimal</td>
+                        <td>@visitaM.IdMedico</td>
+                        <td>@visitaM.Fecha</td>                       
+                        <td><div><img src="~/img/update.png" width="30px" onclick="CargarDatos('@visitaM.Id','@visitaM.IdPropietario','@visitaM.IdMascota','@visitaM.TipoAnimal','@visitaM.IdMedico','@visitaM.Fecha');"></div></td>
+                        <td><div><button id="btnEliminar" asp-route-id="@visitaM.Id" asp-page-handler="delete" type="submit" style="border: none; background-color: #FFFFFF;"><img src="~/img/delete.png" width="30px" onclick="MensajeEliminar();"></button></div></td>                        
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
+</div>
+
+<script>
+    function MensajeActualizar(){
+        confirm("¿Esta seguro que desea actualizar la visita programada?");
+    }
+
+    function MensajeEliminar(){
+        confirm("¿Esta seguro que desea eliminar la visita programada?");
+    }
+
+    function LimpiarDatos(){
+        $("#id").val('');
+        $("#propietario").val('');
+        $("#mascota").val('');
+        $("#tipoAnimal").val('');
+        $("#medico").val('');
+        $("#fecha").val('');
+        $("#btnRegistrar").css('display','block');
+        $("#btnActualizar").css('display','none');
+    }
+
+    function CargarDatos(Id, Propietario, Mascota, TipoAnimal, Medico, Fecha){
+        $("#id").val(Id);
+        $("#propietario").val(Propietario);
+        $("#mascota").val(Mascota);
+        $("#tipoAnimal").val(TipoAnimal);
+        $("#medico").val(Medico);
+        $("#fecha").val(Fecha);
+        $("#btnRegistrar").css('display','none');
+        $("#btnActualizar").css('display','block');
+    }
+</script>

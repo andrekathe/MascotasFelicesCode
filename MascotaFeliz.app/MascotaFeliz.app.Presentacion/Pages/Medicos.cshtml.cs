@@ -16,7 +16,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
         private readonly IRepositorioCentroVeterinario repositorioCentroVeterinario;
         public IEnumerable<Medico> listadoMedicos = new List<Medico> ();
         public IEnumerable<TipoAnimal> listaTiposAnimales = new List<TipoAnimal>();
-        public IEnumerable<CentroVeterinario> listaCentrosVeterinarios = new List<CentroVeterinario>();
+        public IEnumerable<CentroVeterinario> listaCentrosVeterinarios = new List<CentroVeterinario>();       
 
         [BindProperty]
         public Medico medico {get; set;}
@@ -32,7 +32,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
         {
             listadoMedicos = repositorioMedico.GetAllMedicos();
             listaTiposAnimales = repositorioTipoAnimal.GetAllTiposAnimales();
-            listaCentrosVeterinarios = repositorioCentroVeterinario.GetAllCentrosVeterinarios();
+            listaCentrosVeterinarios = repositorioCentroVeterinario.GetAllCentrosVeterinarios();        
         }
 
         public async Task OnPost()

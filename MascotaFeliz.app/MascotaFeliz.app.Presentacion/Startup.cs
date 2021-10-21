@@ -30,8 +30,8 @@ namespace MascotaFeliz.app.Presentacion
             services.AddSingleton<IRepositorioMedico, RepositorioMedico>();            
             services.AddSingleton<IRepositorioPropietario, RepositorioPropietario>();
             services.AddSingleton<IRepositorioTipoAnimal, RepositorioTipoAnimal>();
-            //services.AddSingleton<IRepositorioRegistroVisita, RepositorioRegistroVisita>();           
-            //services.AddSingleton<IRepositorioVisitaProgramada, RepositorioVisitaProgramada>();
+            services.AddSingleton<IRepositorioRegistroVisita, RepositorioRegistroVisita>();           
+            services.AddSingleton<IRepositorioVisitaProgramada, RepositorioVisitaProgramada>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

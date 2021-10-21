@@ -19,9 +19,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
         public IEnumerable<Propietario> listaPropietarios = new List<Propietario>();
 
         [BindProperty]
-        public Mascota mascota {get; set;} 
-        [BindProperty]
-        public int id {get; set;}          
+        public Mascota mascota {get; set;}                 
 
         public MascotasModel(IRepositorioMascota repositorioMascota, IRepositorioTipoAnimal repositorioTipoAnimal, IRepositorioPropietario repositorioPropietario)
         {
@@ -47,9 +45,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
 
         public IActionResult OnPostInsert()
         {
-            Mascota mascotaPost = new Mascota();
-            TipoAnimal tipoAnimal = repositorioTipoAnimal.GetTipoAnimal(id);
-            mascota.TipoAnimal=tipoAnimal;               
+            Mascota mascotaPost = new Mascota();                         
             mascotaPost = repositorioMascota.AddMascota(mascota);                           
                 
             if(mascotaPost != null)
@@ -61,9 +57,7 @@ namespace MascotaFeliz.app.Presentacion.Pages
 
         public IActionResult OnPostUpdate()
         {            
-            Mascota mascotaPost = new Mascota();  
-            TipoAnimal tipoAnimal = repositorioTipoAnimal.GetTipoAnimal(id);
-            mascota.TipoAnimal=tipoAnimal;                          
+            Mascota mascotaPost = new Mascota();                                     
             mascotaPost = repositorioMascota.UpdateMascota(mascota);
             if(mascotaPost != null)
             {

@@ -74,3 +74,5 @@ D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFel
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\CentroVeterinario.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Propietarios.cshtml.g.cs
 D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\Error1.cshtml.g.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\ProgramarVisita.cshtml.g.cs
+D:\misionTIC2022\Desarrollo de software\MascotaFeliz\MascotaFeliz.app\MascotaFeliz.app.Presentacion\obj\Debug\net5.0\Razor\Pages\RegistrarVisita.cshtml.g.cs
